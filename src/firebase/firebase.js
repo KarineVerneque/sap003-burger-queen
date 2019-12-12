@@ -1,4 +1,8 @@
-const firebaseConfig = {
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
     apiKey: "AIzaSyCza1m3VyOX37ByG_86Pqbilt-_I6C3fm8",
     authDomain: "burguerqueen-15a0f.firebaseapp.com",
     databaseURL: "https://burguerqueen-15a0f.firebaseio.com",
@@ -7,6 +11,8 @@ const firebaseConfig = {
     messagingSenderId: "965093118022",
     appId: "1:965093118022:web:7ddbe5aac432f22f097a47",
     measurementId: "G-924MZGQ2GJ"
-};
+  };
+  // Initialize Firebase
+  const firebaseInitialize = firebase.initializeApp(firebaseConfig);
 
-export default firebaseConfig;
+export default firebaseInitialize;

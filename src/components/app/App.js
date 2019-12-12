@@ -1,35 +1,17 @@
-import React from 'react';
-//import './style.css';
-//import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Home from './home';
-import Login from './login';
-import SignUp from './signup';
+import React, { useState, useRef, useEffect } from 'react';
+import firebaseInitialize from '../../firebase/firebase'
 
 
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/signup' component={SignUp} />
-      </div>
-    </Router>
-  )
-}
-
-export default App;
-
-
-
-
-
-
-
-
-/*import React, { useState, useRef, useEffect } from 'react';
 
 function PrintName() {
+
+  firebaseInitialize.firestore().collection('frutas').add({
+    cor: 'amarelo',
+    peso: 'médio',
+    forma: 'redonda'
+  })
+
+
   const [name, setName] = useState('') //state hook
   const inputRef = useRef(null) //ref hook
   
@@ -51,18 +33,3 @@ return(
 }
 
 export default PrintName;
-
-*/
-
-/////////////////////////////////
-
-//function App() {
-//  return (
-//    <div className="App">
-//      <h1>Xuxu</h1>
-//    </div>
-//  );
-//}
-//
-//
-//export default App;

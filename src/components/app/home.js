@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import firebaseConfig from '../../firebase/base';
 
 const Home = () => {
@@ -12,3 +12,4 @@ const Home = () => {
 }
 
 export default Home;
+*/
