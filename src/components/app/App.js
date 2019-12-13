@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-// import firebaseInitialize from '../../firebase/firebase'
+import firebaseInitialize from '../../firebase/firebase'
 // import db from '../../firebase/firebase'
 
 
@@ -17,10 +17,11 @@ import React, { useState, useRef, useEffect } from 'react';
 function App() {
   const [counter, setCounter] = useState(0)
 
-  // useEffect(() => {
-  // firebaseInitialize.firestore().collection('lunchdinner').get()
-  // .then((snap => snap.forEach((doc) => console.log('dinner ', doc.data()))))
-  // }, [])
+  useEffect(() => {
+  firebaseInitialize.firestore().collection('menu')
+  .get()
+  .then((snap => snap.forEach((doc) => console.log('menu', doc.data().name))))
+  }, [])
 
   return (
     <>
