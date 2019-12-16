@@ -10,9 +10,11 @@ function MenuDatas() {
         firebaseInitialize
         .firestore()
         .collection('menu')
-        .onSnapshot((snapshot) => {
+        // .onSnapshot((snapshot) => {
+        .get()
+        .then((snapshot) => {
             const newDatas = snapshot.docs.map((doc) => ({
-                id: doc.id,
+                // id: doc.id,
                 ...doc.data()
             }))            
             setDatas(newDatas)            
@@ -21,13 +23,10 @@ function MenuDatas() {
     return data
 }
 
-
 const Jantar = () => {
-    const buttons = MenuDatas()
-    
+    const buttons = MenuDatas()    
     return (
-        <>
-        
+        <>        
         <button><h2>Jantar</h2></button><br/>
         {
         buttons.map((item) =>
