@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import firebaseInitialize from '../firebase/firebase'
 
-function ClientData() {
+function ClientData(props) {
     const [name, setName] = useState('')
     const [table, setTable] = useState('')
 
     function sendClientData(e) {
         e.preventDefault()
 
-        firebaseInitialize
-        .firestore()
-        .collection('clients')
-        .add({
-            name,
-            tableNumber: parseInt(table)
-        }).then(
-            console.log('acabouuuuu')
-            //setName(''),
-            //setTable('')
-        )
+        // firebaseInitialize
+        // .firestore()
+        // .collection('clients')
+        // .add({
+        //     name: clientName,
+        //     tableNumber: parseInt(table),
+        //     order
+        // }).then(
+        //     console.log('acabouuuuu')
+        //     //setName(''),
+        //     //setTable('')
+        // )
         
     }
 
@@ -33,6 +34,9 @@ function ClientData() {
                     <button>Selecionar</button>
                 </fieldset>
             </form>
+            {
+            props.pedidos.map(p => <div>{p.name}</div>)
+            }
         </section>
 
         <section>
