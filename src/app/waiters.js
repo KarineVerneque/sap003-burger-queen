@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ClientData from '../components/clientsdata'
-import Button from '../components/button'
-// import Jantar from '../components/lunchDinner'
-import firebaseInitialize from '../firebase/firebase'
+import ButtonNew from '../components/button'
+import firebaseInitialize from '../utils/firebase'
 //useRef, useEffect
 
 function Waiters() {
@@ -35,9 +34,24 @@ function Waiters() {
   return (
     <>
     <ClientData pedidos={pedidos}/><br />
+    <h1>Coffe</h1>
+    {
+      breakfast.map(product =>
+        <ButtonNew name={product.name} price={product.price} />
+      )
+    }
+    <h1>Dinner</h1>
+    {
+      
+      dinner.map(product =>
+        <ButtonNew name={product.name} price={product.price} />
+      )
+    }
+    
+    
 
 
-    <Button 
+    {/* <Button 
       products={breakfast} 
       title="Café da manhã" 
       onClick={clienteOrder}
@@ -49,7 +63,7 @@ function Waiters() {
       products={dinner} 
       title="Jantar" 
       onClick={clienteOrder}
-    />
+    /> */}
     
     {/* <br /><br /> */}
     {/* <Button products={data.filter(product => product.breakfast !== "true")} title="Jantar"/><br /><br /> */}

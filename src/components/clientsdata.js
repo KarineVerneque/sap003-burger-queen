@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import firebaseInitialize from '../firebase/firebase'
+import firebaseInitialize from '../utils/firebase'
 
 function ClientData(props) {
     const [name, setName] = useState('')

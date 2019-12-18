@@ -1,5 +1,20 @@
 import React from 'react';
 
+function ButtonNew (props) {
+  return(
+    <>
+    <section onClick={props.handleClick}>
+      <button><p>{props.name}<br /> R$ {props.price},00</p></button>
+      {/* <button><p>{props.price}</p></button> */}
+    </section>
+    </>
+  )
+}
+
+export default ButtonNew;
+
+
+/*
 const Button = (props) => {
   return (
     <>
@@ -16,4 +31,4 @@ const Button = (props) => {
 }
 
 export default Button;
-
+*/
