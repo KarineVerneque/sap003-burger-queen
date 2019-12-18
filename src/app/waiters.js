@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ClientData from '../components/clientsdata'
-import Button from '../components/breakfast'
+import Button from '../components/button'
 // import Jantar from '../components/lunchDinner'
 import firebaseInitialize from '../firebase/firebase'
 //useRef, useEffect
@@ -24,14 +24,13 @@ function Waiters() {
       })
   }, [])
 
-  const order = (banana) => {
-    // console.log(banana)
-    setPedidos([...pedidos, banana])
+  const clienteOrder = (order) => {
+    // console.log(order)
+    setPedidos([...pedidos, order])
   }
 
   const breakfast = data.filter(product => product.breakfast === "true")
   const dinner = data.filter(product => product.breakfast !== "true")
-  // console.log(breakfast)
 
   return (
     <>
@@ -41,7 +40,7 @@ function Waiters() {
     <Button 
       products={breakfast} 
       title="Café da manhã" 
-      onClick={order}
+      onClick={clienteOrder}
     />
 
     <br /><br />
@@ -49,7 +48,7 @@ function Waiters() {
     <Button 
       products={dinner} 
       title="Jantar" 
-      onClick={order}
+      onClick={clienteOrder}
     />
     
     {/* <br /><br /> */}
