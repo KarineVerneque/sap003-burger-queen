@@ -1,17 +1,21 @@
 import React from 'react';
 
-function ButtonNew (props) {
+function Button (props) {
   return(
     <>
     <section onClick={props.handleClick}>
-      <button><p>{props.name}<br /> R$ {props.price},00</p></button>
+      <button
+      onClick={() => props.onClick(props)}
+      class={props.className}
+      ><p>{props.name}</p>
+      <p>R$ {props.price},00</p></button>
       {/* <button><p>{props.price}</p></button> */}
     </section>
     </>
   )
 }
 
-export default ButtonNew;
+export default Button;
 
 
 /*

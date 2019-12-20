@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import firebaseInitialize from '../utils/firebase'
+//import firebaseInitialize from '../utils/firebase'
 
 function ClientData(props) {
     const [name, setName] = useState('')
@@ -34,9 +34,11 @@ function ClientData(props) {
                     <button>Selecionar</button>
                 </fieldset>
             </form>
-            {
-            props.pedidos.map(p => <div>{p.name}</div>)
-            }
+            <div>
+                {   /*             
+                    props.order.map(item => <p>{item.name}</p>)
+                */}
+            </div>
         </section>
 
         <section>
