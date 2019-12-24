@@ -6,10 +6,10 @@ function NavBar(props) {
     <nav>
         <ul>
             <li>
-                <Link to="/garcon">Garçon</Link>
+                <Link to="/BreakFast">BreakFast</Link>
             </li>
             <li>
-                <Link to="/cozinha">Cozinha</Link>
+                <Link to="/dinner">Dinner</Link>
             </li>
         </ul>
   </nav>

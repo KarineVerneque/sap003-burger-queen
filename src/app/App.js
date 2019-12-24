@@ -1,41 +1,27 @@
 import React from 'react';
-import Waiters from './waiters'
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Cozinha from '../pages/cozinha'
-import Garcon from '../pages/garcon'
-import NavBar from '../components/navBar'
+import Hall from '../pages/hall'
 
 
 function App() {
-
   return (
     <>
-    <Waiters /><br />
-
-    <Router>
-      <div>
-        <NavBar />
-        
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route exact path="/garcon">
-            {/* <div>Menu</div> */}
-            <Garcon />
-          </Route>
-          <Route path="/cozinha" component={Cozinha}/>
-          {/* <Cozinha /> */}
-            {/* <Cozinha title="Cozinhaaaa"/> */}
-            {/* <div>Pedidos</div> */}
-          {/* </Route> */}
-        </Switch>
-      </div>
-    </Router>
+    <Hall /><br />    
     </>
   )
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
