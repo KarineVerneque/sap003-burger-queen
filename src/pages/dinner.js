@@ -1,30 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import ClientData from '../components/clientsData'
 import Button from '../components/button'
+import Data from '../components/data'
 import OrderingSection from '../components/orderingSection';
-import firebaseInitialize from '../utils/firebase'
 //import { css } from 'aphrodite';
 import { StyleSheet, css } from 'aphrodite';
 //useRef, useEffect
 
 function Dinner() {
-  const [data, setDatas] = useState([]);
+  const data = Data()
+  
   const [orders, setOrders] = useState([])
   
-  useEffect(() => {
-      firebaseInitialize
-      .firestore()
-      .collection('menu')
-      // .onSnapshot((snapshot) => {
-      .get()
-      .then((snapshot) => { //console.log('snapshot',snapshot.docs)
-          const newDatas = snapshot.docs.map((doc) => ({
-              // id: doc.id,
-              ...doc.data()
-          }))            
-          setDatas(newDatas)            
-      })
-  }, [])
 
   const clienteOrder = (item) => {
     setOrders([...orders, item])
