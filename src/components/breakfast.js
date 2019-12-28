@@ -1,24 +1,15 @@
 import React, { useState } from 'react';
-import Button from './button'
-import Data from './data'
-import OrderingSection from './orderingSection';
-//import { css } from 'aphrodite';
+import Button from './button';
+import Data from './data';
+import OrderSection from './orderSection';
 import { StyleSheet, css } from 'aphrodite';
-//useRef, useEffect
 
 function BreakFast() {
-  const data = Data()
-  const [orders, setOrders] = useState([]);
-  
-  
-  
-  
+  const data = Data();
+  const [orders, setOrders] = useState([]);  
 
   const addOrder = (item) => {
     setOrders([...orders, item])
-    orders.map(product =>
-      <Button name={product.orders} />
-    )  
   }  
 
   const deleteOrder = (item) => {
@@ -30,12 +21,10 @@ function BreakFast() {
 
   return (
     <>
-    
-
     <section className={css(styles.sectionOrders)}>
       {
         orders.map(item => 
-          <OrderingSection className={css(styles.orders)} name={item.name} onClick={deleteOrder}/>
+          <OrderSection className={css(styles.orders)} name={item.name} price={item.price} onClick={deleteOrder}/>
         )
       }      
     </section>

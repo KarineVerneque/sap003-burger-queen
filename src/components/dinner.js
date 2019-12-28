@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import Button from './button'
-import Data from './data'
-import OrderingSection from './orderingSection';
+import Button from './button';
+import Data from './data';
+import OrderSection from './orderSection';
 import { StyleSheet, css } from 'aphrodite';
 
 function Dinner() {
-  const data = Data()
-  
-  const [orders, setOrders] = useState([])
-  
+  const data = Data();
+  const [orders, setOrders] = useState([]);  
 
-  const clienteOrder = (item) => {
+  const addOrder = (item) => {
     setOrders([...orders, item])
-    orders.map(product =>
-      <Button name={product.orders} />
-    )  
   }  
 
   const deleteOrder = (item) => {
@@ -23,25 +18,13 @@ function Dinner() {
   }
 
   const dinner = data.filter(product => product.breakfast !== "true")
-
-
-
-
   
-
-
-
-
-
-
-
-
   return (
     <>
     <section className={css(styles.sectionOrders)}>
       {
         orders.map(item => 
-          <OrderingSection className={css(styles.orders)} name={item.name} onClick={deleteOrder}/>
+          <OrderSection className={css(styles.orders)} name={item.name} price={item.price} onClick={deleteOrder}/>
         )
       }      
     </section>
@@ -50,11 +33,10 @@ function Dinner() {
     <h1 className={css(styles.red)}>Dinner</h1>
       {      
         dinner.map(product =>
-          <Button className={css(styles.button)} name={product.name} price={product.price} onClick={clienteOrder} />
+          <Button className={css(styles.button)} name={product.name} price={product.price} onClick={addOrder} />
         )
       }
-    </section>
-    
+    </section>    
     </>
   )
 
