@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-//import Counter from '../components/counter'
-//import Button from './button';
 
 function OrderingSection (props) {
 

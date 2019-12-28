@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import ClientData from '../components/clientsData'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Breakfast from '../pages/breakfast'
-import Dinner from '../pages/dinner'
+import Breakfast from '../components/breakfast'
+import Dinner from '../components/dinner'
 import NavBar from '../components/navBar'
 
 function Hall() {

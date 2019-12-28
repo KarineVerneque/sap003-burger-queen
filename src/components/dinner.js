@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
-import Button from '../components/button'
-import Data from '../components/data'
-import OrderingSection from '../components/orderingSection';
-//import { css } from 'aphrodite';
+import Button from './button'
+import Data from './data'
+import OrderingSection from './orderingSection';
 import { StyleSheet, css } from 'aphrodite';
-//useRef, useEffect
 
-function BreakFast() {
+function Dinner() {
   const data = Data()
-  const [orders, setOrders] = useState([]);
   
-  
-  
+  const [orders, setOrders] = useState([])
   
 
-  const addOrder = (item) => {
+  const clienteOrder = (item) => {
     setOrders([...orders, item])
     orders.map(product =>
       <Button name={product.orders} />
@@ -26,12 +22,22 @@ function BreakFast() {
     setOrders(deleteFilter)
   }
 
-  const breakfast = data.filter(product => product.breakfast === "true")
+  const dinner = data.filter(product => product.breakfast !== "true")
+
+
+
+
+  
+
+
+
+
+
+
+
 
   return (
     <>
-    
-
     <section className={css(styles.sectionOrders)}>
       {
         orders.map(item => 
@@ -41,15 +47,18 @@ function BreakFast() {
     </section>
     
     <section className={css(styles.menuSection)}>
-    <h1>Coffe</h1>
-      {
-        breakfast.map(product =>
-          <Button className={css(styles.button)} name={product.name} price={product.price} onClick={addOrder} />
+    <h1 className={css(styles.red)}>Dinner</h1>
+      {      
+        dinner.map(product =>
+          <Button className={css(styles.button)} name={product.name} price={product.price} onClick={clienteOrder} />
         )
       }
     </section>
+    
     </>
-  )  
+  )
+
+  
 }
 const styles = StyleSheet.create({
   red: {
@@ -88,4 +97,49 @@ const styles = StyleSheet.create({
   }
 });
 
-export default BreakFast;
+export default Dinner;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+<Button 
+  products={breakfast} 
+  title="Café da manhã" 
+  onClick={clienteOrder}
+/>
+<br /><br />
+<Button 
+  products={dinner} 
+  title="Jantar" 
+  onClick={clienteOrder}
+/>
+<br /><br />
+<Button products={data.filter(product => product.breakfast !== "true")} title="Jantar"/><br /><br />
+*/
+
+
+/*
+function xuxu() {
+const [counter, setCounter] = useState(0);
+
+{ <p contenteditable="true">{counter}</p> }
+{ <button onClick={() => setCounter(counter + 1)}>Contador</button> }
+
+}
+*/
