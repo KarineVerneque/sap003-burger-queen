@@ -21,22 +21,31 @@ function Dinner() {
   
   return (
     <>
-    <section className={css(styles.sectionOrders)}>
-      {
-        orders.map(item => 
-          <OrderSection className={css(styles.orders)} name={item.name} price={item.price} onClick={deleteOrder}/>
-        )
-      }      
-    </section>
-    
-    <section className={css(styles.menuSection)}>
-    <h1 className={css(styles.red)}>Dinner</h1>
-      {      
-        dinner.map(product =>
-          <Button className={css(styles.button)} name={product.name} price={product.price} onClick={addOrder} />
-        )
-      }
-    </section>    
+      <section className={css(styles.sectionOrders)}>
+        {
+          orders.map(item => 
+            <OrderSection
+              className={css(styles.orders)}
+              name={item.name} price={item.price}
+              onClick={deleteOrder}
+            />
+          )
+        }      
+      </section>
+      
+      <section className={css(styles.menuSection)}>
+      <h1 className={css(styles.red)}>Dinner</h1>
+        {      
+          dinner.map(product =>
+            <Button
+              className={css(styles.button)}
+              name={product.name}
+              price={product.price}
+              onClick={addOrder}
+            />
+          )
+        }
+      </section>    
     </>
   )
 
@@ -80,48 +89,3 @@ const styles = StyleSheet.create({
 });
 
 export default Dinner;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-<Button 
-  products={breakfast} 
-  title="Café da manhã" 
-  onClick={clienteOrder}
-/>
-<br /><br />
-<Button 
-  products={dinner} 
-  title="Jantar" 
-  onClick={clienteOrder}
-/>
-<br /><br />
-<Button products={data.filter(product => product.breakfast !== "true")} title="Jantar"/><br /><br />
-*/
-
-
-/*
-function xuxu() {
-const [counter, setCounter] = useState(0);
-
-{ <p contenteditable="true">{counter}</p> }
-{ <button onClick={() => setCounter(counter + 1)}>Contador</button> }
-
-}
-*/

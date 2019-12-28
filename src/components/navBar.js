@@ -12,7 +12,7 @@ function NavBar(props) {
                 <Link to="/dinner">Dinner</Link>
             </li>
         </ul>
-  </nav>
+    </nav>
   )
 }
 

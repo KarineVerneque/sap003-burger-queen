@@ -25,25 +25,21 @@ function ClientData(props) {
 
     return(
         <>
-        <section>
-            <form onSubmit={sendClientData}>
-                <fieldset>
-                    <legend>Dados do cliente:</legend>
-                    Nome: <input type="text" value={name} onChange={event => setName(event.target.value)}/><br/>
-                    Mesa: <input type="number" value={table} onChange={event => setTable(event.target.value)}/><br/>
-                    <button>Selecionar</button>
-                </fieldset>
-            </form>
-            <div>
-                {   /*             
-                    props.order.map(item => <p>{item.name}</p>)
-                */}
-            </div>
-        </section>
-
-        <section>
-            <h2>Pedido da {name}</h2>
-        </section>
+            <section>
+                <form onSubmit={sendClientData}>
+                    <fieldset>
+                        <legend>Dados do cliente:</legend>
+                        Nome: <input type="text" value={name} onChange={event => setName(event.target.value)}/><br/>
+                        Mesa: <input type="number" value={table} onChange={event => setTable(event.target.value)}/><br/>
+                        <button>Selecionar</button>
+                    </fieldset>
+                </form>
+                <div>
+                    {   /*             
+                        props.order.map(item => <p>{item.name}</p>)
+                    */}
+                </div>
+            </section>
         </>
     )    
 }

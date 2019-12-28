@@ -21,22 +21,32 @@ function BreakFast() {
 
   return (
     <>
-    <section className={css(styles.sectionOrders)}>
-      {
-        orders.map(item => 
-          <OrderSection className={css(styles.orders)} name={item.name} price={item.price} onClick={deleteOrder}/>
-        )
-      }      
-    </section>
-    
-    <section className={css(styles.menuSection)}>
-    <h1>Coffe</h1>
-      {
-        breakfast.map(product =>
-          <Button className={css(styles.button)} name={product.name} price={product.price} onClick={addOrder} />
-        )
-      }
-    </section>
+      <section className={css(styles.sectionOrders)}>
+        {
+          orders.map(item => 
+            <OrderSection
+              className={css(styles.orders)}
+              name={item.name}
+              price={'R$ ' + item.price}
+              onClick={deleteOrder}
+            />
+          )
+        }      
+      </section>
+      
+      <section className={css(styles.menuSection)}>
+      <h1>Coffe</h1>
+        {
+          breakfast.map(product =>
+            <Button
+              className={css(styles.button)}
+              name={product.name}
+              price={product.price}
+              onClick={addOrder}
+            />
+          )
+        }
+      </section>
     </>
   )  
 }

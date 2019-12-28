@@ -3,7 +3,6 @@ import firebaseInitialize from '../utils/firebase'
 
 
 function Data() {
-
     const [data, setDatas] = useState([]);
 
     useEffect(() => {
