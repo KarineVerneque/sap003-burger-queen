@@ -6,11 +6,26 @@ import { StyleSheet, css } from 'aphrodite';
 
 function Dinner() {
   const data = Data();
-  const [orders, setOrders] = useState([]);  
+  const [orders, setOrders] = useState([]);
+  const [billPrice, setbillPrice] = useState(0);
 
   const addOrder = (item) => {
+    console.log(item)   
+    if(!orders.includes(item)){
+      setOrders([...orders, item])      
+    } else {
+      item++ 
+      setOrders([...orders])
+    }
+    setbillPrice(billPrice + (item.price));
+  }
+   
+  console.log('total', billPrice)
+  /*
+  const addOrder = (item) => {
     setOrders([...orders, item])
-  }  
+  }
+  */
 
   const deleteOrder = (item) => {
     const deleteFilter = orders.filter(i => i.name !== item.name)
@@ -19,30 +34,57 @@ function Dinner() {
 
   const dinner = data.filter(product => product.breakfast !== "true")
   
+  const types = data.filter(product => product.hb === true && product.breakfast !== "true")
+  const mapTypes = types.map(item => item.types)
+/*
+  const onlyTypes = data.map(i => i.types)
+  //const mapOnlyTypes = onlyTypes.map(i => i.types)
+
+  console.log('onlyTypes',onlyTypes)
+  console.log('types',types)
+  console.log('mapTypes',mapTypes)
+ */ 
+  //types.map(i => console.log('iiii',i.types))
+  
   return (
     <>
+      <section>
+        {
+          mapTypes.map(i =>
+            <>
+            <h2>{i}</h2>
+            </>
+          )
+        }
+      </section>
       <section className={css(styles.sectionOrders)}>
         {
-          orders.map(item => 
-            <OrderSection
-              className={css(styles.orders)}
-              name={item.name} price={item.price}
-              onClick={deleteOrder}
-            />
+          orders.map(item =>
+            <div>
+              <OrderSection
+                className={css(styles.orders)}
+                name={item.name} price={item.price}
+                onClick={deleteOrder}
+              />
+            </div>
           )
         }      
+        <h2>Total: {billPrice}</h2>
       </section>
       
       <section className={css(styles.menuSection)}>
       <h1 className={css(styles.red)}>Dinner</h1>
         {      
           dinner.map(product =>
+            <>
+            {product.hb === true ? <p>tipo</p> : <p>sem tipo</p>}
             <Button
               className={css(styles.button)}
               name={product.name}
               price={product.price}
               onClick={addOrder}
             />
+            </>
           )
         }
       </section>    

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import Button from './button'
+//import Button from './button'
 
-function OrderSection (props) {
-  const [counter, setCounter] = useState(1);
+export default function OrderSection (props) {
+  //const [counter, setCounter] = useState(1);
 
   return(
     <div class={props.className}>
@@ -17,4 +17,4 @@ function OrderSection (props) {
   )
 }
 
-export default OrderSection;
+//OrderSection;

@@ -6,11 +6,25 @@ import { StyleSheet, css } from 'aphrodite';
 
 function BreakFast() {
   const data = Data();
-  const [orders, setOrders] = useState([]);  
+  const [orders, setOrders] = useState([]);
+  const [billPrice, setbillPrice] = useState(0);  
 
   const addOrder = (item) => {
+    console.log(item)   
+    if(!orders.includes(item)){
+      setOrders([...orders, item])      
+    } else {
+      item++ 
+      setOrders([...orders])
+    }
+    setbillPrice(billPrice + (item.price));
+  }
+
+  /*
+  const addOrder = (item) => {
     setOrders([...orders, item])
-  }  
+  }
+  */ 
 
   const deleteOrder = (item) => {
     const deleteFilter = orders.filter(i => i.name !== item.name)
@@ -31,7 +45,8 @@ function BreakFast() {
               onClick={deleteOrder}
             />
           )
-        }      
+        }
+        <h2>Total: {billPrice}</h2>
       </section>
       
       <section className={css(styles.menuSection)}>
