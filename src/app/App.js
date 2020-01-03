@@ -1,11 +1,15 @@
 import React from 'react';
 import Hall from '../pages/hall';
+//import Kitchen from '../pages/kitchen'
+//import NavBar from '../components/menuNavBar'
+//import Buttons from '../components/button';
+//import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 function App() {
   return (
     <>
     <Hall /><br />
-
     {/*
     <ClientData /><br />
     <Router>

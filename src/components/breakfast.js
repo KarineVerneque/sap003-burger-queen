@@ -3,7 +3,7 @@ import Buttons from './button';
 import Data from './data';
 import OrderSection from './orderSection';
 import ClientData from '../components/clientsData'
-import NavBar from '../components/navBar'
+import NavBar from './menuNavBar'
 import { StyleSheet, css } from 'aphrodite';
 
 function BreakFast() {

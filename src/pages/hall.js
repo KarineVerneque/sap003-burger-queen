@@ -1,15 +1,13 @@
 import React from 'react';
-import ClientData from '../components/clientsData'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Breakfast from '../components/breakfast'
 import Dinner from '../components/dinner'
-import NavBar from '../components/navBar'
+import NavBar from '../components/menuNavBar'
 
 function Hall() {
   //const [counter, setCounter] = useState(0);
   return (
     <>
-    <ClientData /><br />
     <Router>
       <div>
         <NavBar />
