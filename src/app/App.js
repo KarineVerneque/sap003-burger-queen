@@ -1,11 +1,26 @@
 import React from 'react';
-import Hall from '../pages/hall'
-
+import Hall from '../pages/hall';
 
 function App() {
   return (
     <>
-    <Hall /><br />    
+    <Hall /><br />
+
+    {/*
+    <ClientData /><br />
+    <Router>
+      <div>
+        <NavBar />
+        <Switch>
+          <Route exact path="/Dinner">
+            <Dinner />
+          </Route>
+          <Route path="/breakfast" component={Breakfast}/>
+        </Switch>
+      </div>
+    </Router>
+    */}
+
     </>
   )
 }

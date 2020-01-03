@@ -27,18 +27,10 @@ function ClientData(props) {
         <>
             <section>
                 <form onSubmit={sendClientData}>
-                    <fieldset>
-                        <legend>Dados do cliente:</legend>
-                        Nome: <input type="text" value={name} onChange={event => setName(event.target.value)}/><br/>
+                        Nome do cliente: <input type="text" value={name} onChange={event => setName(event.target.value)}/><br/>
                         Mesa: <input type="number" value={table} onChange={event => setTable(event.target.value)}/><br/>
                         <button>Selecionar</button>
-                    </fieldset>
                 </form>
-                <div>
-                    {   /*             
-                        props.order.map(item => <p>{item.name}</p>)
-                    */}
-                </div>
             </section>
         </>
     )    

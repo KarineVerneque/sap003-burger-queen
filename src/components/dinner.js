@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import Button from './button';
+import Buttons from './button';
 import Data from './data';
 import OrderSection from './orderSection';
+import ClientData from '../components/clientsData'
+import NavBar from '../components/navBar'
 import { StyleSheet, css } from 'aphrodite';
 
 function Dinner() {
@@ -10,7 +12,6 @@ function Dinner() {
   const [billPrice, setbillPrice] = useState(0);
 
   const addOrder = (item) => {
-    console.log(item)   
     if(!orders.includes(item)){
       setOrders([...orders, item])      
     } else {
@@ -24,8 +25,7 @@ function Dinner() {
     //alert('OIIII')
     console.log('Jesus', mapTypes[0])
   }
-   
-  //console.log('total', billPrice)
+
   /*
   const addOrder = (item) => {
     setOrders([...orders, item])
@@ -45,7 +45,7 @@ function Dinner() {
 
   return (
     <>
-      <section>
+    <section>
         {
           mapTypes.map(i =>
             <>
@@ -54,7 +54,35 @@ function Dinner() {
           )
         }
       </section>
-      <section className={css(styles.sectionOrders)}>
+
+    <div className={css(styles.mainDiv)}>
+      
+
+      <section className={css(styles.menuSection)}>
+        <NavBar />
+        <h1 className={css(styles.red)}>Dinner</h1>
+          {      
+            dinner.map(product =>
+              <div>
+              <Buttons
+                className={css(styles.button)}
+                name={product.name}
+                price={product.price}
+                onClick={addOrder}
+              />
+              {product.hb === true ?
+              <Buttons
+              name={'tipo'}
+              onClick={addingHamburguerTypes}
+              /> :
+              console.log('sem tipo')}
+              </div>
+            )
+          }
+      </section>   
+
+      <section className={css(styles.orderSection)}>
+      <ClientData /><br />
         {
           orders.map(item =>
             <div>
@@ -69,69 +97,49 @@ function Dinner() {
         <h2>Total R${billPrice}</h2>
       </section>
       
-      <section className={css(styles.menuSection)}>
-      <h1 className={css(styles.red)}>Dinner</h1>
-        {      
-          dinner.map(product =>
-            <div>
-            {/*product.hb === true ? <button>tipo</button> : console.log('sem tipo')*/}
-            <Button
-              className={css(styles.button)}
-              name={product.name}
-              price={product.price}
-              onClick={addOrder}
-            />
-            {product.hb === true ?
-            <Button
-            name={'tipo'}
-            onClick={addingHamburguerTypes}
-            /> :
-            console.log('sem tipo')}
-            </div>
-          )
-        }
-      </section>    
+       
+    </div>
     </>
-  )
-
-  
+  )  
 }
+
+
 const styles = StyleSheet.create({
-  red: {
-    background: 'red'
+  mainDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'row'
   },
   menuSection: {
+    width: '45%',
+    textAlign: 'center',
+    border: '1.5px solid gray',
+    alignItens: 'center',
     margin: '10px',
-    //padding: '30px',
-    border: '2px solid red',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItens: 'center'
+  },
+  orderSection: {
+    width: '45%',
+    margin: '10px',
+    padding: '20px',
+    border: '1.5px solid gray',
   },
   button: {
     ///marginTop: '10px',
     margin: '10px',
-    padding: '5px',
-    //display: 'flex',
-    //justifyContent: 'flex-start',
-    //alignItems: 'center', 
+    padding: '20px',
     border: 'none',  
-    borderRadius: '15px',
+    borderRadius: '5px',
     cursor: 'pointer',
-    background: 'green',
-    color: '#EEECE6',
+    background: '#FFC300',
+    color: 'black',
     fontSize: '16px',
     fontWeight: 'bold', 
   },
-  sectionOrders: {
-    border: '2px solid green',
-    display: 'flex'
-  },
-  orders: {
-    background: 'pink',
-    border: '2px solid yellow'
+  teste: {
+    //borderBottom: '2px solid gray'
   }
 });
+
 
 export default Dinner;
 

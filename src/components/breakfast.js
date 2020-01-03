@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import Button from './button';
+import Buttons from './button';
 import Data from './data';
 import OrderSection from './orderSection';
+import ClientData from '../components/clientsData'
+import NavBar from '../components/navBar'
 import { StyleSheet, css } from 'aphrodite';
 
 function BreakFast() {
@@ -33,71 +35,76 @@ function BreakFast() {
   const breakfast = data.filter(product => product.breakfast === "true")
 
   return (
-    <>
-      <section className={css(styles.sectionOrders)}>
+    <div className={css(styles.mainDiv)}>         
+      <section className={css(styles.menuSection)}>
+        <NavBar />
+        <h3>Coffe</h3>
+          {
+            breakfast.map(product =>
+              <div className={css(styles.teste)}>
+                <Buttons
+                  className={css(styles.button)}
+                  name={product.name}
+                  price={product.price}
+                  onClick={addOrder}
+                />   
+              </div>
+            )          
+          }      
+      </section>
+      <section className={css(styles.orderSection)}>
+        <ClientData /><br />
         {
           orders.map(item => 
+            <>
             <OrderSection
               className={css(styles.orders)}
               name={item.name}
               price={'R$ ' + item.price}
               onClick={deleteOrder}
             />
+            </>
           )
         }
-        <h2>Total: {billPrice}</h2>
+        <h2>Total R$ {billPrice}</h2>
       </section>
-      
-      <section className={css(styles.menuSection)}>
-      <h1>Coffe</h1>
-        {
-          breakfast.map(product =>
-            <Button
-              className={css(styles.button)}
-              name={product.name}
-              price={product.price}
-              onClick={addOrder}
-            />
-          )
-        }
-      </section>
-    </>
+    </div>
   )  
 }
+
 const styles = StyleSheet.create({
-  red: {
-    background: 'red'
+  mainDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'row'
   },
   menuSection: {
+    width: '45%',
+    textAlign: 'center',
+    border: '1.5px solid gray',
+    alignItens: 'center',
     margin: '10px',
-    //padding: '30px',
-    border: '2px solid red',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItens: 'center'
+  },
+  orderSection: {
+    width: '45%',
+    margin: '10px',
+    padding: '20px',
+    border: '1.5px solid gray',
   },
   button: {
     ///marginTop: '10px',
     margin: '10px',
-    padding: '5px',
-    //display: 'flex',
-    //justifyContent: 'flex-start',
-    //alignItems: 'center', 
+    padding: '20px',
     border: 'none',  
-    borderRadius: '15px',
+    borderRadius: '5px',
     cursor: 'pointer',
-    background: 'green',
-    color: '#EEECE6',
+    background: '#FFC300',
+    color: 'black',
     fontSize: '16px',
     fontWeight: 'bold', 
   },
-  sectionOrders: {
-    border: '2px solid green',
-    display: 'flex'
-  },
-  orders: {
-    background: 'pink',
-    border: '2px solid yellow'
+  teste: {
+    //borderBottom: '2px solid gray'
   }
 });
 

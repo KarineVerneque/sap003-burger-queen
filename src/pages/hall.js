@@ -7,9 +7,6 @@ import NavBar from '../components/navBar'
 
 function Hall() {
   //const [counter, setCounter] = useState(0);
-
-
-
   return (
     <>
     <ClientData /><br />
@@ -30,9 +27,7 @@ function Hall() {
     </>
   )  
 };
-
 export default Hall;
-
 
 
 
