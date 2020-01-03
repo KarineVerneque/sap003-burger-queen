@@ -19,8 +19,13 @@ function Dinner() {
     }
     setbillPrice(billPrice + (item.price));
   }
+
+  const addingHamburguerTypes = (item) => {
+    //alert('OIIII')
+    console.log('Jesus', mapTypes[0])
+  }
    
-  console.log('total', billPrice)
+  //console.log('total', billPrice)
   /*
   const addOrder = (item) => {
     setOrders([...orders, item])
@@ -36,16 +41,8 @@ function Dinner() {
   
   const types = data.filter(product => product.hb === true && product.breakfast !== "true")
   const mapTypes = types.map(item => item.types)
-/*
-  const onlyTypes = data.map(i => i.types)
-  //const mapOnlyTypes = onlyTypes.map(i => i.types)
 
-  console.log('onlyTypes',onlyTypes)
-  console.log('types',types)
-  console.log('mapTypes',mapTypes)
- */ 
-  //types.map(i => console.log('iiii',i.types))
-  
+
   return (
     <>
       <section>
@@ -69,22 +66,28 @@ function Dinner() {
             </div>
           )
         }      
-        <h2>Total: {billPrice}</h2>
+        <h2>Total R${billPrice}</h2>
       </section>
       
       <section className={css(styles.menuSection)}>
       <h1 className={css(styles.red)}>Dinner</h1>
         {      
           dinner.map(product =>
-            <>
-            {product.hb === true ? <p>tipo</p> : <p>sem tipo</p>}
+            <div>
+            {/*product.hb === true ? <button>tipo</button> : console.log('sem tipo')*/}
             <Button
               className={css(styles.button)}
               name={product.name}
               price={product.price}
               onClick={addOrder}
             />
-            </>
+            {product.hb === true ?
+            <Button
+            name={'tipo'}
+            onClick={addingHamburguerTypes}
+            /> :
+            console.log('sem tipo')}
+            </div>
           )
         }
       </section>    
@@ -131,3 +134,18 @@ const styles = StyleSheet.create({
 });
 
 export default Dinner;
+
+
+
+
+
+/*
+  const onlyTypes = data.map(i => i.types)
+  //const mapOnlyTypes = onlyTypes.map(i => i.types)
+
+  console.log('onlyTypes',onlyTypes)
+  console.log('types',types)
+  console.log('mapTypes',mapTypes)
+ */ 
+  //types.map(i => console.log('iiii',i.types))
+  

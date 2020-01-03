@@ -9,8 +9,7 @@ function BreakFast() {
   const [orders, setOrders] = useState([]);
   const [billPrice, setbillPrice] = useState(0);  
 
-  const addOrder = (item) => {
-    console.log(item)   
+  const addOrder = (item) => { 
     if(!orders.includes(item)){
       setOrders([...orders, item])      
     } else {
@@ -25,7 +24,7 @@ function BreakFast() {
     setOrders([...orders, item])
   }
   */ 
-
+  
   const deleteOrder = (item) => {
     const deleteFilter = orders.filter(i => i.name !== item.name)
     setOrders(deleteFilter)
