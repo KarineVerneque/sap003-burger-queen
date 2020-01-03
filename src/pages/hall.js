@@ -45,8 +45,10 @@ function Hall() {
   return (
     <div className={css(styles.mainDiv)}> 
       <section className={css(styles.menuSection)}>
-      <Buttons name={'Café'} onClick={() => setMenu([...breakfast])}/>
-      <Buttons name={'Jantar'} onClick={() => setMenu([...dinner])}/>
+        <div className={css(styles.menuButtonsSection)}>
+          <Buttons className={css(styles.menuButton)} name={'Café'} onClick={() => setMenu([...breakfast])}/>
+          <Buttons className={css(styles.menuButton)} name={'Jantar'} onClick={() => setMenu([...dinner])}/>
+        </div>
           {
             menu.map(product =>
               <div className={css(styles.teste)}>
@@ -92,18 +94,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row'
   },
+  menuButtonsSection: {
+    //background: 'pink',
+    display: 'flex',
+    justifyContent: 'space-around'
+  },
+  menuButton: {
+    ':focus': {
+      borderBottom: '2px solid #EA0000',
+      color: '#EA0000'
+    },
+    border: 'none',
+    borderBottom: '2px solid white',
+    background: 'white',
+    fontSize: '1em',     
+  },
   menuSection: {
     width: '45%',
-    textAlign: 'center',
+    flexDirection: 'column',
+    //textAlign: 'center',
     border: '1.5px solid gray',
     alignItens: 'center',
     margin: '10px',
-  },
-  orderSection: {
-    width: '45%',
-    margin: '10px',
-    padding: '20px',
-    border: '1.5px solid gray',
   },
   button: {
     ///marginTop: '10px',
@@ -116,6 +128,12 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: '16px',
     fontWeight: 'bold', 
+  },
+  orderSection: {
+    width: '45%',
+    margin: '10px',
+    padding: '20px',
+    border: '1.5px solid gray',
   },
   teste: {
     //borderBottom: '2px solid gray'

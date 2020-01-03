@@ -2,8 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Hall from '../pages/hall'
 import Kitchen from '../pages/kitchen'
-import NavBar from '../components/menuNavBar'
-
+import NavBar from '../components/navBar'
 
 function App() {
   return (
