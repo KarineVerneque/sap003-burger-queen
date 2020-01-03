@@ -1,30 +1,22 @@
 import React from 'react';
-import Hall from '../pages/hall';
-//import Kitchen from '../pages/kitchen'
-//import NavBar from '../components/menuNavBar'
-//import Buttons from '../components/button';
-//import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Hall from '../pages/hall'
+import Kitchen from '../pages/kitchen'
+import NavBar from '../components/menuNavBar'
 
 
 function App() {
   return (
     <>
-    <Hall /><br />
-    {/*
-    <ClientData /><br />
-    <Router>
-      <div>
-        <NavBar />
-        <Switch>
-          <Route exact path="/Dinner">
-            <Dinner />
-          </Route>
-          <Route path="/breakfast" component={Breakfast}/>
-        </Switch>
-      </div>
-    </Router>
-    */}
-
+      <Router>
+        <div>
+          <NavBar />
+          <Switch>
+            <Route path="/hall" component={Hall}/>
+            <Route path="/kitchen" component={Kitchen}/>
+          </Switch>
+        </div>
+      </Router>
     </>
   )
 }

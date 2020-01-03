@@ -1,69 +1,125 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Breakfast from '../components/breakfast'
-import Dinner from '../components/dinner'
-import NavBar from '../components/menuNavBar'
+import React, { useState } from 'react';
+import Buttons from '../components/button';
+import Data from '../components/data';
+import OrderSection from '../components/orderSection';
+import ClientData from '../components/clientsData'
+import { StyleSheet, css } from 'aphrodite';
 
 function Hall() {
-  //const [counter, setCounter] = useState(0);
+  const data = Data();
+  const [orders, setOrders] = useState([]);
+  const [billPrice, setbillPrice] = useState(0);  
+  const [menu, setMenu] = useState([])
+
+  const addOrder = (item) => { 
+    if(!orders.includes(item)){
+      setOrders([...orders, item])      
+    } else {
+      item++ 
+      setOrders([...orders])
+    }
+    setbillPrice(billPrice + (item.price));
+  }
+
+  const addingHamburguerTypes = (item) => {
+    //alert('OIIII')
+    const types = data.filter(product => product.hb === true && product.breakfast !== "true")
+    const mapTypes = types.map(item => item.types)
+    console.log('Jesus', mapTypes[0])
+  }
+
+  /*
+  const addOrder = (item) => {
+    setOrders([...orders, item])
+  }
+  */ 
+  
+  const deleteOrder = (item) => {
+    const deleteFilter = orders.filter(i => i.name !== item.name)
+    setOrders(deleteFilter)
+  }
+
+  const breakfast = data.filter(product => product.breakfast === "true")
+  const dinner = data.filter(product => product.breakfast !== "true")
+
   return (
-    <>
-    <Router>
-      <div>
-        <NavBar />
-        <Switch>
-          <Route exact path="/Dinner">
-            <Dinner />
-          </Route>
-          <Route path="/breakfast" component={Breakfast}/>
-        </Switch>
-      </div>
-    </Router>
-
-    {/*<p contenteditable="true">{counter}</p>
-    <button onClick={() => setCounter(counter + 1)}>Contador</button>*/}
-    </>
+    <div className={css(styles.mainDiv)}> 
+      <section className={css(styles.menuSection)}>
+      <Buttons name={'Café'} onClick={() => setMenu([...breakfast])}/>
+      <Buttons name={'Jantar'} onClick={() => setMenu([...dinner])}/>
+          {
+            menu.map(product =>
+              <div className={css(styles.teste)}>
+                <Buttons
+                  className={css(styles.button)}
+                  name={product.name}
+                  price={product.price}
+                  onClick={addOrder}
+                />
+                {product.hb === true ?
+              <Buttons
+              name={'tipo'}
+              onClick={addingHamburguerTypes}
+              /> :
+              console.log('sem tipo')}  
+              </div>
+            )          
+          }      
+      </section>
+      <section className={css(styles.orderSection)}>
+        <ClientData /><br />
+        {
+          orders.map(item => 
+            <>
+            <OrderSection
+              className={css(styles.orders)}
+              name={item.name}
+              price={'R$ ' + item.price}
+              onClick={deleteOrder}
+            />
+            </>
+          )
+        }
+        <h2>Total R$ {billPrice}</h2>
+      </section>
+    </div>
   )  
-};
-export default Hall;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-<Button 
-  products={breakfast} 
-  title="Café da manhã" 
-  onClick={clienteOrder}
-/>
-<br /><br />
-<Button 
-  products={dinner} 
-  title="Jantar" 
-  onClick={clienteOrder}
-/>
-<br /><br />
-<Button products={data.filter(product => product.breakfast !== "true")} title="Jantar"/><br /><br />
-*/
-
-
-/*
-function xuxu() {
-const [counter, setCounter] = useState(0);
-
-{ <p contenteditable="true">{counter}</p> }
-{ <button onClick={() => setCounter(counter + 1)}>Contador</button> }
-
 }
-*/
+
+const styles = StyleSheet.create({
+  mainDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'row'
+  },
+  menuSection: {
+    width: '45%',
+    textAlign: 'center',
+    border: '1.5px solid gray',
+    alignItens: 'center',
+    margin: '10px',
+  },
+  orderSection: {
+    width: '45%',
+    margin: '10px',
+    padding: '20px',
+    border: '1.5px solid gray',
+  },
+  button: {
+    ///marginTop: '10px',
+    margin: '10px',
+    padding: '20px',
+    border: 'none',  
+    borderRadius: '5px',
+    cursor: 'pointer',
+    background: '#FFC300',
+    color: 'black',
+    fontSize: '16px',
+    fontWeight: 'bold', 
+  },
+  teste: {
+    //borderBottom: '2px solid gray'
+  }
+});
+
+export default Hall;

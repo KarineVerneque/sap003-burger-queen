@@ -7,8 +7,7 @@ function Counter (props) {
         {props.amount}
       </p>
       <button
-      onClick={() => props.onClick(props)}
-      >
+        onClick={() => props.onClick(props)}>
         Contator
       </button>
     </>
