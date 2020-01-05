@@ -25,7 +25,7 @@ function Hall() {
     //alert('OIIII')
     const types = data.filter(product => product.hb === true && product.breakfast !== "true")
     const mapTypes = types.map(item => item.types)
-    console.log('Jesus', mapTypes[0])
+    console.log('Jesus', mapTypes)
   }
 
   /*
@@ -33,11 +33,27 @@ function Hall() {
     setOrders([...orders, item])
   }
   */ 
+
+ const types = data.filter(product => product.hb === true && product.breakfast !== "true")
+ const mapTypes = types.map(item => item.types)
   
-  const deleteOrder = (item) => {
+  /*const deleteOrder = (item) => {
     const deleteFilter = orders.filter(i => i.name !== item.name)
     setOrders(deleteFilter)
-  }
+  }*/
+
+  const deleteOrder = product => {
+    const deleteFilter = orders.filter(i => i.name !== product.name)
+    setOrders(deleteFilter)
+
+    const index = orders.indexOf(product)
+    console.log('index', index)
+
+    //setOrders([...orders]);
+    //const deleteTotal = billPrice - product.price
+    //setbillPrice(deleteTotal)
+  };
+
 
   const breakfast = data.filter(product => product.breakfast === "true")
   const dinner = data.filter(product => product.breakfast !== "true")
@@ -59,11 +75,11 @@ function Hall() {
                   onClick={addOrder}
                 />
                 {product.hb === true ?
-              <Buttons
-              name={'tipo'}
-              onClick={addingHamburguerTypes}
-              /> :
-              console.log('sem tipo')}  
+                <Buttons
+                name={'tipo'}
+                onClick={addingHamburguerTypes}
+                /> :
+                console.log('sem tipo')}  
               </div>
             )          
           }      
