@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-function Buttons (props) {
+export default function Buttons (props) {
   return(
     <>
       <section onClick={props.handleClick} className={css(styles.buttonSection)}>
@@ -14,7 +14,7 @@ function Buttons (props) {
       </section>
     </>
   )
-}
+};
 
 const styles = StyleSheet.create({
   buttonSection: {
@@ -23,6 +23,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-around',
   }
-})
+});
 
-export default Buttons;

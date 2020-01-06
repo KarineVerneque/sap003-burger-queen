@@ -5,58 +5,36 @@ import OrderSection from '../components/orderSection';
 import ClientData from '../components/clientsData'
 import { StyleSheet, css } from 'aphrodite';
 
-function Hall() {
+export default function Hall() {
   const data = Data();
   const [orders, setOrders] = useState([]);
-  const [billPrice, setbillPrice] = useState(0);  
   const [menu, setMenu] = useState([])
 
   const addOrder = (item) => { 
-    if(!orders.includes(item)){
-      setOrders([...orders, item])      
-    } else {
-      item++ 
-      setOrders([...orders])
-    }
-    setbillPrice(billPrice + (item.price));
+    setOrders([...orders, item])
   }
 
   const addingHamburguerTypes = (item) => {
-    //alert('OIIII')
     const types = data.filter(product => product.hb === true && product.breakfast !== "true")
     const mapTypes = types.map(item => item.types)
     console.log('Jesus', mapTypes)
   }
 
-  /*
-  const addOrder = (item) => {
-    setOrders([...orders, item])
-  }
-  */ 
-
- const types = data.filter(product => product.hb === true && product.breakfast !== "true")
- const mapTypes = types.map(item => item.types)
+  const types = data.filter(product => product.hb === true && product.breakfast !== "true")
+  const mapTypes = types.map(item => item.types)
   
-  /*const deleteOrder = (item) => {
-    const deleteFilter = orders.filter(i => i.name !== item.name)
-    setOrders(deleteFilter)
-  }*/
+  const total = orders.reduce((acc, item) => acc + item.price, 0)
 
   const deleteOrder = product => {
-    const deleteFilter = orders.filter(i => i.name !== product.name)
-    setOrders(deleteFilter)
-
-    const index = orders.indexOf(product)
-    console.log('index', index)
-
-    //setOrders([...orders]);
-    //const deleteTotal = billPrice - product.price
-    //setbillPrice(deleteTotal)
+    const indexItem = (orders.indexOf(product));
+    orders.splice(indexItem,1);
+    setOrders([...orders]);
   };
 
 
   const breakfast = data.filter(product => product.breakfast === "true")
   const dinner = data.filter(product => product.breakfast !== "true")
+
 
   return (
     <div className={css(styles.mainDiv)}> 
@@ -79,7 +57,7 @@ function Hall() {
                 name={'tipo'}
                 onClick={addingHamburguerTypes}
                 /> :
-                console.log('sem tipo')}  
+                console.log('sem tipo')}
               </div>
             )          
           }      
@@ -98,11 +76,11 @@ function Hall() {
             </>
           )
         }
-        <h2>Total R$ {billPrice}</h2>
+        <h2>Total: R$ {total}</h2>
       </section>
     </div>
   )  
-}
+};
 
 const styles = StyleSheet.create({
   mainDiv: {
@@ -155,5 +133,3 @@ const styles = StyleSheet.create({
     //borderBottom: '2px solid gray'
   }
 });
-
-export default Hall;

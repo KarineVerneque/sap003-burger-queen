@@ -13,7 +13,7 @@ export default function OrderSection (props) {
       </span>    
     </div>
   )
-}
+};
 
 const styles = StyleSheet.create({
   priceAndName: {
@@ -25,12 +25,11 @@ const styles = StyleSheet.create({
   image: {
     background: 'white',
     border: 'none',
+    //backgroundImage: "url(" + "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjpveLuqO_mAhWHGrkGHf-qBgQQjRx6BAgBEAQ&url=https%3A%2F%2Fpt.pngtree.com%2Ffree-png-vectors%2Flixeira&psig=AOvVaw2jdQWng6Thrjat9wgM1XJG&ust=1578411863315783" + ")",
     backgroundImage: "url(" + "http://icons.iconarchive.com/icons/custom-icon-design/mono-general-4/512/trash-icon.png" + ")",
     backgroundPosition: 'center',
     backgroundSize: '20px',
     backgroundRepeat: 'no-repeat',
     padding: '10px',
   }
-})
-
-//OrderSection;
+});

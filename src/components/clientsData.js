@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //import firebaseInitialize from '../utils/firebase'
 
-function ClientData(props) {
+export default function ClientData(props) {
     const [name, setName] = useState('')
     const [table, setTable] = useState('')
 
@@ -34,8 +34,8 @@ function ClientData(props) {
             </section>
         </>
     )    
-}
-export default ClientData
+};
+
 
 
 

@@ -4,7 +4,7 @@ import Hall from '../pages/hall'
 import Kitchen from '../pages/kitchen'
 import NavBar from '../components/navBar'
 
-function App() {
+export default function App() {
   return (
     <>
       <Router>
@@ -18,9 +18,7 @@ function App() {
       </Router>
     </>
   )
-}
-
-export default App;
+};
 
 
 

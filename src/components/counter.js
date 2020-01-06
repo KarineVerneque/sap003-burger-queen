@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Counter (props) {
+export default function Counter (props) {
   return(
     <>
       <p contenteditable="true">
@@ -12,6 +12,4 @@ function Counter (props) {
       </button>
     </>
   )
-}
-
-export default Counter;
+};

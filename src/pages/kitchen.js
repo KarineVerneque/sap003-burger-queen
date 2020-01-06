@@ -1,10 +1,9 @@
 import React from 'react';
 
-function Kitchen() {
+export default function Kitchen() {
   return (
     <>
         <h1>Cozinha</h1>
     </>
   )  
 };
-export default Kitchen;

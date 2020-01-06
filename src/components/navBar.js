@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { StyleSheet, css } from 'aphrodite';
 
-function NavBar(props) {
+export default function NavBar(props) {
   return(
     <nav>
       <ul className={css(styles.ul)}>
@@ -15,7 +15,7 @@ function NavBar(props) {
       </ul>
     </nav>
   )
-}
+};
 
 const styles = StyleSheet.create({
   ul: {
@@ -43,6 +43,4 @@ const styles = StyleSheet.create({
     padding: '14px 16px',
     textDecoration: 'none',
   }
-})
-
-export default NavBar
+});

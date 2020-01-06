@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import firebaseInitialize from '../utils/firebase'
 
 
-function Data() {
+export default function Data() {
     const [data, setDatas] = useState([]);
 
     useEffect(() => {
@@ -20,6 +20,4 @@ function Data() {
         })
     }, [])
     return data
-}
-
-export default Data
+};
