@@ -8,10 +8,17 @@ import { StyleSheet, css } from 'aphrodite';
 export default function Hall() {
   const data = Data();
   const [orders, setOrders] = useState([]);
-  const [menu, setMenu] = useState([])
+  const [menu, setMenu] = useState([]);
 
-  const addOrder = (item) => { 
-    setOrders([...orders, item])
+  const addOrder = (item) => {
+    const index = orders.findIndex(orderItem => orderItem.name === item.name);
+    if (index === -1) {
+      setOrders([...orders, {...item, quantity: 1}])
+    } else {
+      orders[index].quantity += 1;
+      setOrders([...orders]);
+    }
+    // setOrders([...orders, item])
   }
 
   const addingHamburguerTypes = (item) => {
@@ -21,14 +28,19 @@ export default function Hall() {
   }
 
   const types = data.filter(product => product.hb === true && product.breakfast !== "true")
-  const mapTypes = types.map(item => item.types)
+  const mapTypes = types.map(item => item.types[0])
   
-  const total = orders.reduce((acc, item) => acc + item.price, 0)
+  const total = orders.reduce((acc, item) => acc + (item.price * item.quantity), 0)
 
-  const deleteOrder = product => {
-    const indexItem = (orders.indexOf(product));
-    orders.splice(indexItem,1);
-    setOrders([...orders]);
+  const deleteOrder = product => {    
+    const index = orders.findIndex(orderItem => orderItem.name === product.name);
+    const newOrders = orders.filter(orderItem => orderItem.name !== product.name);
+    if (product.quantity === 1) {
+      setOrders([...newOrders]);
+    } else {
+      orders[index].quantity -= 1;
+      setOrders([...orders]);
+    }
   };
 
 
@@ -72,6 +84,7 @@ export default function Hall() {
               name={item.name}
               price={'R$ ' + item.price}
               onClick={deleteOrder}
+              quantity={item.quantity}
             />
             </>
           )
