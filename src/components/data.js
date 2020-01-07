@@ -9,9 +9,9 @@ export default function Data() {
         firebaseInitialize
         .firestore()
         .collection('menu')
-        // .onSnapshot((snapshot) => {
-        .get()
-        .then((snapshot) => { //console.log('snapshot',snapshot.docs)
+        .onSnapshot((snapshot) => {
+        //.get()
+        //.then((snapshot) => { //console.log('snapshot',snapshot.docs)
             const newDatas = snapshot.docs.map((doc) => ({
                 // id: doc.id,
                 ...doc.data()

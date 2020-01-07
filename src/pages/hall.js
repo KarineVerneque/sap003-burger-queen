@@ -51,6 +51,7 @@ export default function Hall() {
       table: table,
       order: orders,
       total: total,
+      status: 'pendente',
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     }
 
