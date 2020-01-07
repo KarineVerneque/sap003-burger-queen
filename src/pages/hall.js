@@ -4,7 +4,6 @@ import firebase from '../utils/firebase'
 import Buttons from '../components/button';
 import Data from '../components/data';
 import OrderSection from '../components/orderSection';
-import ClientData from '../components/clientsData'
 import Input from '../components/input'
 import { StyleSheet, css } from 'aphrodite';
 
@@ -23,7 +22,6 @@ export default function Hall() {
       orders[index].quantity += 1;
       setOrders([...orders]);
     }
-    // setOrders([...orders, item])
   }
 
   const deleteOrder = product => {    
@@ -59,17 +57,11 @@ export default function Hall() {
     .firestore()
     .collection('clients')
     .add(clientOrder)
-
-    setName('');
-    setTable('');
-    setOrders([]);    
-
-    // then(
-        // console.log('acabouuuuu')
-        // setName(''),
-        // setTable('')
-    // )
-    
+    .then(
+      setName(''),
+      setTable(''),
+      setOrders([]),    
+    )    
   }
   
   const total = orders.reduce((acc, item) => acc + (item.price * item.quantity), 0)
@@ -105,7 +97,6 @@ export default function Hall() {
           }      
       </section>
       <section className={css(styles.orderSection)}>
-        {/* <ClientData /><br /> */}
         <form>
           <Input type={'text'} value={name} placeholder={'Nome do cliente'} onChange={(e) => setName(e.target.value)}/>
           <Input type={'text'} value={table} placeholder={'Mesa'} onChange={(e) => setTable(e.target.value)}/>
