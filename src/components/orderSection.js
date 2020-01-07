@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 export default function OrderSection (props) {
+  
   return(
     <div class={props.className}>
       <span className={css(styles.priceAndName)}>

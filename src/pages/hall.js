@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+// import firebaseInitialize from '../utils/firebase'
+import firebase from '../utils/firebase'
 import Buttons from '../components/button';
 import Data from '../components/data';
 import OrderSection from '../components/orderSection';
 import ClientData from '../components/clientsData'
+import Input from '../components/input'
 import { StyleSheet, css } from 'aphrodite';
 
 export default function Hall() {
   const data = Data();
   const [orders, setOrders] = useState([]);
   const [menu, setMenu] = useState([]);
+  const [name, setName] = useState('');
+  const [table, setTable] = useState('');
 
   const addOrder = (item) => {
     const index = orders.findIndex(orderItem => orderItem.name === item.name);
@@ -21,28 +26,52 @@ export default function Hall() {
     // setOrders([...orders, item])
   }
 
-  const addingHamburguerTypes = (item) => {
-    const types = data.filter(product => product.hb === true && product.breakfast !== "true")
-    const mapTypes = types.map(item => item.types)
-    console.log('Jesus', mapTypes)
-  }
-
-  const types = data.filter(product => product.hb === true && product.breakfast !== "true")
-  const mapTypes = types.map(item => item.types[0])
-  
-  const total = orders.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-
   const deleteOrder = product => {    
     const index = orders.findIndex(orderItem => orderItem.name === product.name);
-    const newOrders = orders.filter(orderItem => orderItem.name !== product.name);
+    const filterDelete = orders.filter(orderItem => orderItem.name !== product.name);
     if (product.quantity === 1) {
-      setOrders([...newOrders]);
+      setOrders([...filterDelete]);
     } else {
       orders[index].quantity -= 1;
       setOrders([...orders]);
     }
   };
 
+  const addingHamburguerTypes = (item) => {
+    const types = data.filter(product => product.hb === true && product.breakfast !== "true")
+    const mapTypes = types.map(item => item.types[0])
+    console.log('Jesus', mapTypes)
+  }
+
+  function sendOrder(e) {
+    // e.preventDefault()
+    console.log('orders',orders)
+    const clientOrder = {
+      name: name,
+      table: table,
+      order: orders,
+      total: total,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    }
+
+    firebase
+    .firestore()
+    .collection('clients')
+    .add(clientOrder)
+
+    setName('');
+    setTable('');
+    setOrders([]);    
+
+    // then(
+        // console.log('acabouuuuu')
+        // setName(''),
+        // setTable('')
+    // )
+    
+  }
+  
+  const total = orders.reduce((acc, item) => acc + (item.price * item.quantity), 0)
 
   const breakfast = data.filter(product => product.breakfast === "true")
   const dinner = data.filter(product => product.breakfast !== "true")
@@ -62,7 +91,7 @@ export default function Hall() {
                   className={css(styles.button)}
                   name={product.name}
                   price={product.price}
-                  onClick={addOrder}
+                  onClick={() => addOrder(product)}
                 />
                 {product.hb === true ?
                 <Buttons
@@ -75,7 +104,11 @@ export default function Hall() {
           }      
       </section>
       <section className={css(styles.orderSection)}>
-        <ClientData /><br />
+        {/* <ClientData /><br /> */}
+        <form>
+          <Input type={'text'} value={name} placeholder={'Nome do cliente'} onChange={(e) => setName(e.target.value)}/>
+          <Input type={'text'} value={table} placeholder={'Mesa'} onChange={(e) => setTable(e.target.value)}/>
+        </form>
         {
           orders.map(item => 
             <>
@@ -86,10 +119,12 @@ export default function Hall() {
               onClick={deleteOrder}
               quantity={item.quantity}
             />
+            {/* {console.log('orders', orders)} */}
             </>
-          )
+          )          
         }
         <h2>Total: R$ {total}</h2>
+        <Buttons name={'enviar'} onClick={sendOrder}/>
       </section>
     </div>
   )  
