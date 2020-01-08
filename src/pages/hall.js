@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
-// import firebaseInitialize from '../utils/firebase'
+import React, { useState, useEffect } from 'react';
 import firebase from '../utils/firebase'
 import Buttons from '../components/button';
-import Data from '../components/data';
 import OrderSection from '../components/orderSection';
 import Input from '../components/input'
 import { StyleSheet, css } from 'aphrodite';
 
 export default function Hall() {
-  const data = Data();
+  const [data, setDatas] = useState([]);
   const [orders, setOrders] = useState([]);
   const [menu, setMenu] = useState([]);
   const [name, setName] = useState('');
   const [table, setTable] = useState('');
+  
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection('menu')
+      .onSnapshot((snapshot) => {
+      //.get()
+      //.then((snapshot) => { //console.log('snapshot',snapshot.docs)
+          const newDatas = snapshot.docs.map((doc) => ({
+              // id: doc.id,
+              ...doc.data()
+          }))            
+          setDatas(newDatas)            
+      })
+  }, [])
 
   const addOrder = (item) => {
     const index = orders.findIndex(orderItem => orderItem.name === item.name);
