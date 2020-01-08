@@ -17,10 +17,7 @@ export default function Hall() {
       .firestore()
       .collection('menu')
       .onSnapshot((snapshot) => {
-      //.get()
-      //.then((snapshot) => { //console.log('snapshot',snapshot.docs)
           const newDatas = snapshot.docs.map((doc) => ({
-              // id: doc.id,
               ...doc.data()
           }))            
           setDatas(newDatas)            
@@ -54,8 +51,7 @@ export default function Hall() {
     console.log('Jesus', mapTypes)
   }
 
-  function sendOrder(e) {
-    // e.preventDefault()
+  function sendOrder() {
     console.log('orders',orders)
     const clientOrder = {
       name: name,
@@ -68,7 +64,7 @@ export default function Hall() {
 
     firebase
     .firestore()
-    .collection('clients')
+    .collection('orders')
     .add(clientOrder)
     .then(
       setName(''),
