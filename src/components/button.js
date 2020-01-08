@@ -4,24 +4,23 @@ import { StyleSheet, css } from 'aphrodite';
 export default function Buttons (props) {
   return(
     <>
-      <section onClick={props.handleClick} className={css(styles.buttonSection)}>
+      {/* <section onClick={props.handleClick} className={css(styles.buttonSection11)}> */}
         <button
           onClick={() => props.onClick(props)}
           class={props.className}>
           <p>{props.name}</p>
           <p>{props.price}</p>
         </button>
-      </section>
+      {/* </section> */}
     </>
   )
 };
 
 const styles = StyleSheet.create({
-  buttonSection: {
-    textAlign: 'start',
-    lineHeight: '2',
-    display: 'flex',
-    justifyContent: 'space-around',
-  }
+  // button: {
+  //   justifyContent: 'center',
+  //   display: 'flex',
+  //   width:'50%'
+  // }
 });
 

@@ -47,7 +47,7 @@ export default function Hall() {
 
   const addingHamburguerTypes = (item) => {
     const types = data.filter(product => product.hb === true && product.breakfast !== "true")
-    const mapTypes = types.map(item => item.types[0])
+    const mapTypes = types.map(item => item.types)
     console.log('Jesus', mapTypes)
   }
 
@@ -86,7 +86,8 @@ export default function Hall() {
           <Buttons className={css(styles.menuButton)} name={'Café'} onClick={() => setMenu([...breakfast])}/>
           <Buttons className={css(styles.menuButton)} name={'Jantar'} onClick={() => setMenu([...dinner])}/>
         </div>
-          {
+        <div className={css(styles.jessica)}>
+           {
             menu.map(product =>
               <div className={css(styles.teste)}>
                 <Buttons
@@ -103,7 +104,9 @@ export default function Hall() {
                 console.log('sem tipo')}
               </div>
             )
-          }      
+          } 
+        </div>
+               
       </section>
       <section className={css(styles.orderSection)}>
         <form>
@@ -112,15 +115,14 @@ export default function Hall() {
         </form>
         {
           orders.map(item => 
-            <>
-              <OrderSection
-                className={css(styles.orders)}
-                name={item.name}
-                price={'R$ ' + item.price}
-                onClick={deleteOrder}
-                quantity={item.quantity}
-              />
-            </>
+          
+            <OrderSection
+              className={css(styles.orders)}
+              name={item.name}
+              price={'R$ ' + item.price}
+              onClick={deleteOrder}
+              quantity={item.quantity}
+            />
           )          
         }
         <h2>Total: R$ {total}</h2>
@@ -138,17 +140,23 @@ const styles = StyleSheet.create({
   },
   menuButtonsSection: {
     display: 'flex',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    
   },
   menuButton: {
     ':focus': {
       borderBottom: '2px solid #EA0000',
       color: '#EA0000'
     },
+    background: 'red',
     border: 'none',
     borderBottom: '2px solid white',
     background: 'white',
-    fontSize: '1em',     
+    fontSize: '1em', 
+    width:'50%',
+    display:'flex', 
+    justifyContent:'center'
+
   },
   menuSection: {
     width: '45%',
@@ -156,6 +164,11 @@ const styles = StyleSheet.create({
     border: '1.5px solid gray',
     alignItens: 'center',
     margin: '10px',
+  },
+  jessica: {
+    display:"flex",
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   button: {
     margin: '10px',
@@ -165,8 +178,10 @@ const styles = StyleSheet.create({
     cursor: 'pointer',
     background: '#FFC300',
     color: 'black',
-    fontSize: '16px',
+    fontSize: '10px',
     fontWeight: 'bold', 
+    width: '8rem',
+    height: '7rem'
   },
   orderSection: {
     width: '45%',
