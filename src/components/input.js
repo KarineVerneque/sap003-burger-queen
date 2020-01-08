@@ -11,4 +11,4 @@ export default function Input(props) {
         onChange={props.onChange}
         />
     )
-}
+};

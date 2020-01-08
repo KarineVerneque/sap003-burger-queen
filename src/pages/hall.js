@@ -113,14 +113,13 @@ export default function Hall() {
         {
           orders.map(item => 
             <>
-            <OrderSection
-              className={css(styles.orders)}
-              name={item.name}
-              price={'R$ ' + item.price}
-              onClick={deleteOrder}
-              quantity={item.quantity}
-            />
-            {/* {console.log('orders', orders)} */}
+              <OrderSection
+                className={css(styles.orders)}
+                name={item.name}
+                price={'R$ ' + item.price}
+                onClick={deleteOrder}
+                quantity={item.quantity}
+              />
             </>
           )          
         }
@@ -138,7 +137,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   menuButtonsSection: {
-    //background: 'pink',
     display: 'flex',
     justifyContent: 'space-around'
   },
@@ -155,13 +153,11 @@ const styles = StyleSheet.create({
   menuSection: {
     width: '45%',
     flexDirection: 'column',
-    //textAlign: 'center',
     border: '1.5px solid gray',
     alignItens: 'center',
     margin: '10px',
   },
   button: {
-    ///marginTop: '10px',
     margin: '10px',
     padding: '20px',
     border: 'none',  
@@ -177,8 +173,5 @@ const styles = StyleSheet.create({
     margin: '10px',
     padding: '20px',
     border: '1.5px solid gray',
-  },
-  teste: {
-    //borderBottom: '2px solid gray'
   }
 });
