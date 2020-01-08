@@ -6,11 +6,14 @@ export default function OrderSection (props) {
   return(
     <div class={props.className}>
       <span className={css(styles.priceAndName)}>
-        <span>{props.name} </span>
-        <span>Quantidade: {props.quantity}</span>
-        <span> {props.price} </span>
-          <button className={css(styles.image)} onClick={() => props.onClick(props)}>       
-          </button>
+        <span>{props.name}</span>
+        <span>{props.quantity}</span>
+        <span>{props.price}</span>
+        <span>{props.table}</span>   
+        <span>{props.status}</span>   
+        <span>{props.order}</span>     
+        <button className={css(styles.image)} onClick={() => props.onClick(props)}>       
+        </button>
       </span>    
     </div>
   )

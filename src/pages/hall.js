@@ -54,7 +54,7 @@ export default function Hall() {
   function sendOrder() {
     console.log('orders',orders)
     const clientOrder = {
-      name: name,
+      clientName: name,
       table: table,
       order: orders,
       total: total,
@@ -102,7 +102,7 @@ export default function Hall() {
                 /> :
                 console.log('sem tipo')}
               </div>
-            )          
+            )
           }      
       </section>
       <section className={css(styles.orderSection)}>
