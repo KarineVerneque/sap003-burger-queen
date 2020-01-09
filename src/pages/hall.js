@@ -59,7 +59,8 @@ export default function Hall() {
       order: orders,
       total: total,
       status: 'pendente',
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      // timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      time: new Date().getTime(),
     }
 
     firebase
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: '10px',
-    padding: '20px',
+    padding: '10px',
     border: 'none',  
     borderRadius: '5px',
     cursor: 'pointer',

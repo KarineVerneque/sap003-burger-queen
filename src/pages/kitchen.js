@@ -6,6 +6,7 @@ import Buttons from '../components/button';
 
 export default function Kitchen() {
   const [data, setDatas] = useState([]);
+  // const [timeStamp, setTimeStamp] = ('');
 
   useEffect(() => {
     firebase
@@ -25,7 +26,12 @@ export default function Kitchen() {
     .firestore()
     .collection('orders')
     .doc(item.id)
-    .update({status: "pronto"})
+    .update(
+      {
+        status: "pronto",
+        timeFinal: new Date().getTime(),
+      }
+      )
     .then(
       console.log('FOIIIIIIIIIIIII')
     )
@@ -40,6 +46,18 @@ export default function Kitchen() {
     .then(
       // console.log('FOIIIIIIIIIIIII')
     )
+  }
+
+  const calculateTimestamp = (final, inicial) => {
+    const timestamp  = (final - inicial) /1000;
+
+    const hours = Math.floor(timestamp/60/60);
+    const minutes = Math.floor((timestamp - hours *60 *60) /60);
+    const seconds = Math.floor(timestamp - hours * 60 * 60 - minutes * 60);
+    
+
+    return hours + ':' + minutes + ':' + seconds;
+    // return timestamp
   }
 
   const statusPending = data.filter(i => i.status === 'pendente')
@@ -83,6 +101,7 @@ export default function Kitchen() {
               name={item.clientName}
               table={item.table}
               status={item.status}
+              timestamp={calculateTimestamp(item.timeFinal, item.time)}
               order={item.order.map(i => 
                 <div>
                   <span>

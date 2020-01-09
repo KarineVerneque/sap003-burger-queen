@@ -10,7 +10,8 @@ export default function OrderSection (props) {
       <span>{props.price}</span>
       <span>{props.table}</span>   
       <span>{props.status}</span>   
-      <span>{props.order}</span>     
+      <span>{props.order}</span>  
+      <span>{props.timestamp}</span>    
       {/* <button className={css(styles.image)} onClick={() => props.onClick(props)}>       
       </button>  */}
     </div>
