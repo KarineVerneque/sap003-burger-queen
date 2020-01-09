@@ -6,7 +6,7 @@ export default function Buttons (props) {
     <>
       {/* <section onClick={props.handleClick} className={css(styles.buttonSection11)}> */}
         <button
-          onClick={() => props.onClick(props)}
+          onClick={props.onClick}
           class={props.className}>
           <p>{props.name}</p>
           <p>{props.price}</p>

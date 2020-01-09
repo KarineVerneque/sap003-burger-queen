@@ -45,14 +45,14 @@ export default function Hall() {
     }
   };
 
-  const addingHamburguerTypes = (item) => {
+  const addingHamburguerTypes = () => {
     const types = data.filter(product => product.hb === true && product.breakfast !== "true")
     const mapTypes = types.map(item => item.types)
     console.log('Jesus', mapTypes)
   }
 
   function sendOrder() {
-    console.log('orders',orders)
+    // console.log('orders',orders)
     const clientOrder = {
       clientName: name,
       table: table,
@@ -115,14 +115,16 @@ export default function Hall() {
         </form>
         {
           orders.map(item => 
-          
+            <>
             <OrderSection
               className={css(styles.orders)}
               name={item.name}
+              onClick={() => deleteOrder(item)}
               price={'R$ ' + item.price}
-              onClick={deleteOrder}
               quantity={item.quantity}
             />
+            <Buttons name={'X'} onClick={() => deleteOrder(item)}/>
+            </>
           )          
         }
         <h2>Total: R$ {total}</h2>

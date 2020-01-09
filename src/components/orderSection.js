@@ -11,8 +11,8 @@ export default function OrderSection (props) {
       <span>{props.table}</span>   
       <span>{props.status}</span>   
       <span>{props.order}</span>     
-      <button className={css(styles.image)} onClick={() => props.onClick(props)}>       
-      </button> 
+      {/* <button className={css(styles.image)} onClick={() => props.onClick(props)}>       
+      </button>  */}
     </div>
   )
 };
