@@ -50,11 +50,10 @@ export default function Kitchen() {
 
   const calculateTimestamp = (final, inicial) => {
     const timestamp  = (final - inicial) /1000;
-
-    const hours = Math.floor(timestamp/60/60);
-    const minutes = Math.floor((timestamp - hours *60 *60) /60);
-    const seconds = Math.floor(timestamp - hours * 60 * 60 - minutes * 60);
     
+    const hours = Math.floor(timestamp/60/60);
+    const minutes = Math.floor((timestamp - hours * 60 * 60) /60);
+    const seconds = Math.floor(timestamp - hours * 60 * 60 - minutes * 60);    
 
     return hours + ':' + minutes + ':' + seconds;
     // return timestamp
