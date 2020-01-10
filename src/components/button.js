@@ -4,10 +4,11 @@ export default function Buttons (props) {
   return(
     <>
       <button
+        value={props.name}
         onClick={props.onClick}
         class={props.className}>
-        <p>{props.name}</p>
-        <p>{props.price}</p>
+        {props.name} <br />
+        {props.price}
       </button>
     </>
   )

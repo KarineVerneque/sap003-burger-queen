@@ -11,6 +11,7 @@ export default function Hall() {
   const [menu, setMenu] = useState([]);
   const [name, setName] = useState('');
   const [table, setTable] = useState('');
+  // const [options, setOptions] = useState('');
   
   useEffect(() => {
     firebase
@@ -44,11 +45,25 @@ export default function Hall() {
       setOrders([...orders]);
     }
   };
+  // console.log('eu', options)
 
-  const addingHamburguerTypes = () => {
-    const types = data.filter(product => product.hb === true && product.breakfast !== "true")
-    const mapTypes = types.map(item => item.types)
-    console.log('Jesus', mapTypes)
+  const addingHamburguerTypes = (e, product) => {
+    console.log('Jessica', e.target)
+    // setOptions(e.target.value)
+      // console.log(options);
+      const jaque = {...product, name: product.name + ' de ' + e.target.value}
+      addOrder(jaque)
+  
+
+
+    // console.log('Options',jaque)
+
+
+
+
+    // const types = data.filter(product => product.hb === true && product.breakfast !== "true")
+    // const mapTypes = types.map(item => item.types)
+    // console.log('Jesus', mapTypes)
   }
 
   function sendOrder() {
@@ -91,18 +106,39 @@ export default function Hall() {
            {
             menu.map(product =>
               <div className={css(styles.teste)}>
-                <Buttons
+                
+                {
+                  product.hb === true ?
+                  (<div>
+                  <Buttons
+                    className={css(styles.button)}
+                    name={product.name}
+                    price={product.price}          
+                  />
+                  
+                  {product.types.map(i =>
+
+                  <Buttons
+                  name={i}
+                  price={product.price}
+                  onClick={(e) => addingHamburguerTypes(e, product)}
+                  />
+                    
+                  // <button
+                  // value={i}
+                  // onClick={(e) => addingHamburguerTypes(e, product)}
+                  // >{i}</button> 
+                     
+                  )}
+                  </div>)
+                  :
+                  <Buttons
                   className={css(styles.button)}
                   name={product.name}
                   price={product.price}
                   onClick={() => addOrder(product)}
                 />
-                {product.hb === true ?
-                <Buttons
-                name={'tipo'}
-                onClick={addingHamburguerTypes}
-                /> :
-                console.log('sem tipo')}
+                }
               </div>
             )
           } 
@@ -134,6 +170,10 @@ export default function Hall() {
     </div>
   )  
 };
+
+{/* <label>
+                       <input type='radio' name='options' value={i} onChange={(e) => console.log(e.target.value)}/> {i}
+                     </label> */}
 
 const styles = StyleSheet.create({
   mainDiv: {
