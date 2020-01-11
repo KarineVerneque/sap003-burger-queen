@@ -31,9 +31,6 @@ export default function Kitchen() {
         status: "pronto",
         timeFinal: new Date().getTime(),
       }
-      )
-    .then(
-      console.log('FOIIIIIIIIIIIII')
     )
   }
 
@@ -43,9 +40,6 @@ export default function Kitchen() {
     .collection('orders')
     .doc(item.id)
     .update({status: "entregue"})
-    .then(
-      // console.log('FOIIIIIIIIIIIII')
-    )
   }
 
   const calculateTimestamp = (final, inicial) => {
@@ -68,24 +62,24 @@ export default function Kitchen() {
       <section>
       <h2>pendentes</h2>
         {
-          statusPending.map(item => 
+          statusPending.map(clientOrder => 
           <div>
             <OrderSection
               className={css(styles.orders)}
-              name={item.clientName}
-              table={item.table}
-              status={item.status}
-              order={item.order.map(i => 
+              name={clientOrder.clientName}
+              // table={item.table}
+              // status={item.status}
+              {...clientOrder}
+              order={clientOrder.order.map(i => 
                 <div>
                   <span>
                     {i.name}
                     {i.quantity}
-                  </span>  
-                  
+                  </span>                  
                 </div>
               )}
             />
-            <Buttons name={'Pronto'} onClick={() => readyOrder(item)}/>  
+            <Buttons name={'Pronto'} onClick={() => readyOrder(clientOrder)}/>  
           </div>
         )}
       </section>
@@ -93,25 +87,25 @@ export default function Kitchen() {
       <section>
         <h2>Prontos</h2>
         {
-          statusReady.map(item => 
+          statusReady.map(clientOrder => 
           <div>
             <OrderSection
               className={css(styles.orders)}
-              name={item.clientName}
-              table={item.table}
-              status={item.status}
-              timestamp={calculateTimestamp(item.timeFinal, item.time)}
-              order={item.order.map(i => 
+              {...clientOrder}
+              name={clientOrder.clientName}
+              // table={item.table}
+              // status={item.status}
+              timestamp={calculateTimestamp(clientOrder.timeFinal, clientOrder.time)}
+              order={clientOrder.order.map(i => 
                 <div>
                   <span>
                     {i.name}
                     {i.quantity}
-                  </span>  
-                  
+                  </span>    
                 </div>
               )}
             />
-            <Buttons name={'Entregue'} onClick={() => deliveredOrder(item)}/>  
+            <Buttons name={'Entregue'} onClick={() => deliveredOrder(clientOrder)}/>  
           </div>
         )}
       </section>
@@ -119,18 +113,19 @@ export default function Kitchen() {
       <section>
         <h2>Entregues</h2>
         {
-          statusDelivered.map(item => 
+          statusDelivered.map(clientOrder => 
           <div>
             <OrderSection
+            {...clientOrder}
               className={css(styles.orders)}
-              name={item.clientName}
-              table={item.table}
-              status={item.status}
-              order={item.order.map(i => 
+              name={clientOrder.clientName}
+              // table={item.table}
+              // status={item.status}
+              order={clientOrder.order.map(product => 
                 <div>
                   <span>
-                    {i.name}
-                    {i.quantity}
+                    {product.name}
+                    {product.quantity}
                   </span>  
                   
                 </div>

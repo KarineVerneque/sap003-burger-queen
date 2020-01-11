@@ -45,29 +45,16 @@ export default function Hall() {
       setOrders([...orders]);
     }
   };
-  // console.log('eu', options)
 
-  const addingHamburguerTypes = (e, product) => {
-    console.log('Jessica', e.target)
+  const addOptions = (e, product) => {
+    console.log('target ai', e.target)
     // setOptions(e.target.value)
-      // console.log(options);
-      const jaque = {...product, name: product.name + ' de ' + e.target.value}
-      addOrder(jaque)
-  
+    const option = {...product, name: product.name + ' de ' + e.target.value}
+    addOrder(option)
 
-
-    // console.log('Options',jaque)
-
-
-
-
-    // const types = data.filter(product => product.hb === true && product.breakfast !== "true")
-    // const mapTypes = types.map(item => item.types)
-    // console.log('Jesus', mapTypes)
   }
 
   function sendOrder() {
-    // console.log('orders',orders)
     const clientOrder = {
       clientName: name,
       table: table,
@@ -102,40 +89,35 @@ export default function Hall() {
           <Buttons className={css(styles.menuButton)} name={'Café'} onClick={() => setMenu([...breakfast])}/>
           <Buttons className={css(styles.menuButton)} name={'Jantar'} onClick={() => setMenu([...dinner])}/>
         </div>
-        <div className={css(styles.jessica)}>
+        <div className={css(styles.allProductsDiv)}>
            {
             menu.map(product =>
               <div className={css(styles.teste)}>
                 
                 {
                   product.hb === true ?
-                  (<div>
-                  <Buttons
-                    className={css(styles.button)}
-                    name={product.name}
-                    price={product.price}          
-                  />
-                  
-                  {product.types.map(i =>
+                  (
+                    <div>
 
-                  <Buttons
-                  name={i}
-                  price={product.price}
-                  onClick={(e) => addingHamburguerTypes(e, product)}
-                  />
-                    
-                  // <button
-                  // value={i}
-                  // onClick={(e) => addingHamburguerTypes(e, product)}
-                  // >{i}</button> 
-                     
-                  )}
-                  </div>)
+                      <fieldset>
+                      <legend>{product.name}</legend>                      
+                      {product.types.map(option =>
+                        <Buttons
+                        className={css(styles.button)}
+                        name={option}
+                        price={product.price}
+                        onClick={(e) => addOptions(e, product)}
+                        />
+                      )}
+                      </fieldset> 
+                    </div>
+                  )
                   :
                   <Buttons
                   className={css(styles.button)}
-                  name={product.name}
-                  price={product.price}
+                  /*name={product.name}
+                  price={product.price}*/
+                  {...product}
                   onClick={() => addOrder(product)}
                 />
                 }
@@ -171,10 +153,6 @@ export default function Hall() {
   )  
 };
 
-{/* <label>
-                       <input type='radio' name='options' value={i} onChange={(e) => console.log(e.target.value)}/> {i}
-                     </label> */}
-
 const styles = StyleSheet.create({
   mainDiv: {
     display: 'flex',
@@ -191,7 +169,6 @@ const styles = StyleSheet.create({
       borderBottom: '2px solid #EA0000',
       color: '#EA0000'
     },
-    background: 'red',
     border: 'none',
     borderBottom: '2px solid white',
     background: 'white',
@@ -208,20 +185,20 @@ const styles = StyleSheet.create({
     alignItens: 'center',
     margin: '10px',
   },
-  jessica: {
+  allProductsDiv: {
     display:"flex",
     flexWrap: 'wrap',
     justifyContent: 'center',
   },
   button: {
-    margin: '10px',
-    padding: '10px',
+    margin: '8px',
+    padding: '8px',
     border: 'none',  
     borderRadius: '5px',
     cursor: 'pointer',
     background: '#FFC300',
     color: 'black',
-    fontSize: '10px',
+    fontSize: '15px',
     fontWeight: 'bold', 
     width: '8rem',
     height: '7rem'
