@@ -47,12 +47,21 @@ export default function Hall() {
   };
 
   const addOptions = (e, product) => {
-    console.log('target ai', e.target)
+    console.log('oi', product)
+    alert('extras')  
+    // console.log('target ai', e.target.value)
     // setOptions(e.target.value)
     const option = {...product, name: product.name + ' de ' + e.target.value}
     addOrder(option)
-
   }
+
+  const addExtras = (e, product) => {
+    // console.log('target ai', product)
+    // setOptions(e.target.value)
+    const option = {...product, name: product.name + ' com ' + e.target.value}
+    addOrder(option)
+  }
+  
 
   function sendOrder() {
     const clientOrder = {
@@ -98,10 +107,9 @@ export default function Hall() {
                   product.hb === true ?
                   (
                     <div>
-
                       <fieldset>
                       <legend>{product.name}</legend>                      
-                      {product.types.map(option =>
+                      {product.options.map(option =>
                         <Buttons
                         className={css(styles.button)}
                         name={option}
@@ -109,6 +117,14 @@ export default function Hall() {
                         onClick={(e) => addOptions(e, product)}
                         />
                       )}
+                      {
+                        product.extras.map(i => //console.log('olha',i)
+                        <Buttons
+                        name={i}
+                        onClick={(e) => addExtras(e, product)}
+                        />
+                      )}
+                      
                       </fieldset> 
                     </div>
                   )
