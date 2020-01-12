@@ -118,14 +118,13 @@ export default function Hall() {
                         onClick={(e) => addOptions(e, product)}
                         />
                       )}
-                      {
+                      {/* {
                         product.extras.map(i => //console.log('olha',i)
                         <Buttons
                         name={i}
                         onClick={(e) => addExtras(e, product)}
                         />
-                      )}
-                      
+                      )}     */}
                       </fieldset> 
                     </div>
                   )
@@ -152,13 +151,14 @@ export default function Hall() {
           orders.map(item => 
             <>
             <OrderSection
-              className={css(styles.orders)}
+              className={css(styles.order)}
               name={item.name}
               onClick={() => deleteOrder(item)}
               price={'R$ ' + item.price}
               quantity={item.quantity}
+              btnName={'X'}
             />
-            <Buttons name={'X'} onClick={() => deleteOrder(item)}/>
+            {/* <Buttons name={'X'} onClick={() => deleteOrder(item)}/> */}
             </>
           )          
         }
@@ -178,7 +178,6 @@ const styles = StyleSheet.create({
   menuButtonsSection: {
     display: 'flex',
     justifyContent: 'space-around',
-    
   },
   menuButton: {
     ':focus': {
@@ -186,20 +185,23 @@ const styles = StyleSheet.create({
       color: '#EA0000'
     },
     border: 'none',
-    borderBottom: '2px solid white',
-    background: 'white',
-    fontSize: '1em', 
+    borderBottom: '2px solid rgba(0,0,0,0.7)',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    color: '#fff',
+    fontSize: '1.5em', 
     width:'50%',
     display:'flex', 
-    justifyContent:'center'
-
+    justifyContent:'center',
+    padding: '25px',
   },
   menuSection: {
     width: '45%',
     flexDirection: 'column',
     border: '1.5px solid gray',
+    borderRadius: '5px',
     alignItens: 'center',
     margin: '10px',
+    backgroundColor: 'rgba(0,0,0,0.7)',
   },
   allProductsDiv: {
     display:"flex",
@@ -207,22 +209,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    margin: '8px',
-    padding: '8px',
+    margin: '9px',
+    padding: '1.5px',
     border: 'none',  
     borderRadius: '5px',
     cursor: 'pointer',
-    background: '#FFC300',
+    backgroundColor: 'rgba(255,195,0,0.9)',
     color: 'black',
-    fontSize: '15px',
+    fontSize: '1.2em',
     fontWeight: 'bold', 
-    width: '8rem',
-    height: '7rem'
+    width: '6em',
+    height: '5em'
   },
   orderSection: {
     width: '45%',
+    minHeight: '400px',
     margin: '10px',
     padding: '20px',
     border: '1.5px solid gray',
+    borderRadius: '5px',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    color: '#fff'
+  },
+  order: {
+    background: 'pink'
   }
 });

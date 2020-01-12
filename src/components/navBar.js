@@ -9,6 +9,9 @@ export default function NavBar(props) {
           <li className={css(styles.li)}>
             <Link className={css(styles.a)} to="/hall">Hall</Link>
           </li>
+          <li>
+            Burguer Queen
+          </li>
           <li className={css(styles.li)}>
             <Link className={css(styles.a)} to="/kitchen">Kitchen</Link>
           </li>
@@ -23,11 +26,12 @@ const styles = StyleSheet.create({
     margin: '0',
     padding: '0',
     overflow: 'hidden',
-    backgroundColor: '#EA0000',
+    backgroundColor: '#000',
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     flexDirection: 'row',
-    fontSize: '1.2em'
+    fontSize: '1.2em',
+    color: '#fff'
   },
   li: {
     //flexDirection: 'column'
