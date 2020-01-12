@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../utils/firebase';
-import OrderSection from '../components/orderSection';
 import OrderKitchen from '../components/orderKitchen'
 import { StyleSheet, css } from 'aphrodite';
 import Buttons from '../components/button';
 
 export default function Kitchen() {
   const [data, setDatas] = useState([]);
-  // const [timeStamp, setTimeStamp] = ('');
   const [orders, setOrders] = useState([])
 
   useEffect(() => {
@@ -44,7 +42,7 @@ export default function Kitchen() {
       {status: "entregue",
       timeFinal: new Date().getTime(),
       }
-      )
+    )
   }
 
   const calculateTimestamp = (final, inicial) => {
@@ -55,7 +53,6 @@ export default function Kitchen() {
     const seconds = Math.floor(timestamp - hours * 60 * 60 - minutes * 60);    
 
     return hours + ':' + minutes + ':' + seconds;
-    // return timestamp
   }
 
   const statusPending = data.filter(i => i.status === 'pendente')
@@ -75,7 +72,7 @@ export default function Kitchen() {
         i.status === 'pendente' ?
         <OrderKitchen 
           {...i}
-          btnName={'Prontoooooooo'}
+          btnName={'Pronto'}
           onClick={() => readyOrder(i)}
           order={i.order.map(i => 
             <div>
@@ -85,7 +82,7 @@ export default function Kitchen() {
               </span>                  
             </div>
           )}
-          />:
+          />: i.status === 'pronto' ?
           <OrderKitchen 
           {...i}
           btnName={'Entregue'}
@@ -99,95 +96,23 @@ export default function Kitchen() {
               </span>                  
             </div>
           )}
-          />)
+          />:
+          <OrderKitchen 
+          {...i}
+          timestamp={calculateTimestamp(i.timeFinal, i.time)}
+          order={i.order.map(i => 
+            <div>
+              <span>
+                <p>{i.name}</p>
+                {i.quantity}
+              </span>                  
+            </div>
+          )}
+          />
+        )
       }
       </section>
     </>
-    /*<>    
-      <section>
-      <h2>pendentes</h2>
-        {
-          statusPending.map(clientOrder => 
-          <div>
-            <OrderKitchen 
-            {...clientOrder}
-            btnName={'Pronto'}
-            onClick={() => readyOrder(clientOrder)}
-            order={clientOrder.order.map(i => 
-              <div>
-                <span>
-                  <p>{i.name}</p>
-                  {i.quantity}
-                </span>                  
-              </div>
-            )}
-            />
-            {/* <OrderSection
-              className={css(styles.orders)}
-              name={clientOrder.clientName}
-              // table={item.table}
-              // status={item.status}
-              {...clientOrder}
-              order={clientOrder.order.map(i => 
-                <div>
-                  <span>
-                    {i.name}
-                    {i.quantity}
-                  </span>                  
-                </div>
-              )}
-            /> *//*}
-            <Buttons name={'Pronto'} onClick={() => readyOrder(clientOrder)}/>  
-          </div>
-        )}
-      </section>
-      <section>
-        <h2>Prontos</h2>
-        {
-          statusReady.map(clientOrder => 
-          <div>
-            <OrderKitchen
-              {...clientOrder}
-              btnName={'Entregue'}
-              onClick={() => deliveredOrder(clientOrder)}
-              name={clientOrder.clientName}
-              order={clientOrder.order.map(i => 
-                <div>
-                  <span>
-                    {i.name}
-                    {i.quantity}
-                  </span>    
-                </div>
-              )}
-            />
-            
-          </div>
-        )}
-      </section>
-      <section>
-        <h2>Entregues</h2>
-        {
-          statusDelivered.map(clientOrder => 
-          <div>
-            <OrderKitchen
-            {...clientOrder}
-              name={clientOrder.clientName}
-              timestamp={calculateTimestamp(clientOrder.timeFinal, clientOrder.time)}
-              order={clientOrder.order.map(product => 
-                <div>
-                  <span>
-                    {product.name}
-                    {product.quantity}
-                  </span>  
-                  
-                </div>
-              )}
-            />
-            
-          </div>
-        )}
-      </section>
-    </>*/
   )  
 };
 

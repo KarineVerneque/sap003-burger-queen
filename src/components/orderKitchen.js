@@ -12,8 +12,16 @@ export default function OrderKitchen (props) {
                     <th className={css(styles.border)}>Nome</th>                    
                     <th className={css(styles.border)}>status</th>
                     <th className={css(styles.border)}>Pedido</th>
-                    <th className={css(styles.border)}>Selecionar</th>
-                    <th>tempo</th>
+                    {
+                      props.status !== 'entregue' ?
+                        <th className={css(styles.border)}>Selecionar</th>
+                      : false
+                    }
+                    {
+                      props.status === 'entregue' ?
+                        <th>tempo</th>
+                      : false
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -22,12 +30,16 @@ export default function OrderKitchen (props) {
                     <td className={css(styles.border)}>{props.clientName}</td>
                     <td className={css(styles.border)}>{props.status}</td>
                     <td className={css(styles.border)}>{props.order}</td>
-                    <td className={css(styles.border)}><button onClick={() => props.onClick(props)}>{props.btnName}</button></td>
-                    {/* <td>{props.timestamp}</td> */}
-                    {props.status ==='entregue' ?        
-                      <td>{props.timestamp}</td>
-                      : ''
-                      }
+                    {
+                      props.status !== 'entregue' ?
+                        <td className={css(styles.border)}><button onClick={() => props.onClick(props)}>{props.btnName}</button></td>
+                      : false
+                    }
+                    {
+                      props.status ==='entregue' ?        
+                        <td>{props.timestamp}</td>
+                      : false
+                    }
                 </tr>
             </tbody>
         </table>         
