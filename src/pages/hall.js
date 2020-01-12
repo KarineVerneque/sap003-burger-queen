@@ -48,7 +48,7 @@ export default function Hall() {
 
   const addOptions = (e, product) => {
     console.log('oi', product)
-    alert('extras')  
+    // alert('extras')  
     // console.log('target ai', e.target.value)
     // setOptions(e.target.value)
     const option = {...product, name: product.name + ' de ' + e.target.value}
@@ -99,7 +99,7 @@ export default function Hall() {
           <Buttons className={css(styles.menuButton)} name={'Jantar'} onClick={() => setMenu([...dinner])}/>
         </div>
         <div className={css(styles.allProductsDiv)}>
-           {
+          {
             menu.map(product =>
               <div className={css(styles.teste)}>
                 
@@ -114,6 +114,7 @@ export default function Hall() {
                         className={css(styles.button)}
                         name={option}
                         price={product.price}
+                        extra={product.extras}
                         onClick={(e) => addOptions(e, product)}
                         />
                       )}
@@ -140,8 +141,7 @@ export default function Hall() {
               </div>
             )
           } 
-        </div>
-               
+        </div>               
       </section>
       <section className={css(styles.orderSection)}>
         <form>

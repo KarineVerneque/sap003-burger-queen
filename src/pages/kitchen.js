@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../utils/firebase';
 import OrderSection from '../components/orderSection';
+import OrderKitchen from '../components/orderKitchen'
 import { StyleSheet, css } from 'aphrodite';
 import Buttons from '../components/button';
 
@@ -64,7 +65,18 @@ export default function Kitchen() {
         {
           statusPending.map(clientOrder => 
           <div>
-            <OrderSection
+            <OrderKitchen 
+            {...clientOrder}
+            order={clientOrder.order.map(i => 
+              <div>
+                <span>
+                  <p>{i.name}</p>
+                  {i.quantity}
+                </span>                  
+              </div>
+            )}
+            />
+            {/* <OrderSection
               className={css(styles.orders)}
               name={clientOrder.clientName}
               // table={item.table}
@@ -78,7 +90,7 @@ export default function Kitchen() {
                   </span>                  
                 </div>
               )}
-            />
+            /> */}
             <Buttons name={'Pronto'} onClick={() => readyOrder(clientOrder)}/>  
           </div>
         )}
