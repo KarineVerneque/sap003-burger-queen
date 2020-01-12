@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { StyleSheet, css } from 'aphrodite';
+import Burgerqueen from '../img/Burgerqueen.png'
 
 export default function NavBar(props) {
   return(
@@ -10,7 +11,8 @@ export default function NavBar(props) {
             <Link className={css(styles.a)} to="/hall">Hall</Link>
           </li>
           <li>
-            Burguer Queen
+            {/* <p className={css(styles.foto)}></p> */}
+            <img className={css(styles.img)} src={Burgerqueen} alt="Burgerqueen" />
           </li>
           <li className={css(styles.li)}>
             <Link className={css(styles.a)} to="/kitchen">Kitchen</Link>
@@ -21,6 +23,10 @@ export default function NavBar(props) {
 };
 
 const styles = StyleSheet.create({
+  img:{
+    margin: '0',
+    width: '110px',
+  },
   ul: {
     listStyleType: 'none',
     margin: '0',
@@ -30,11 +36,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-around',
     flexDirection: 'row',
-    fontSize: '1.2em',
-    color: '#fff'
+    fontSize: '1.3em',
+    color: '#fff',
+    height: '62px',
   },
   li: {
-    //flexDirection: 'column'
+    textAlign:'center'
   },
   a: {
     ':focus': {

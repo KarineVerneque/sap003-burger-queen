@@ -61,10 +61,10 @@ export default function Kitchen() {
 
   return (
     <>
-      <div>
-        <Buttons name={'Pendente'} onClick={() => setOrders([...statusPending])}/>
-        <Buttons name={'Prontos'} onClick={() => setOrders([...statusReady])}/>
-        <Buttons name={'Entregues'} onClick={() => setOrders([...statusDelivered])}/>
+      <div className={css(styles.menuButtonsSection)}>
+        <Buttons className={css(styles.button)} name={'Pendente'} onClick={() => setOrders([...statusPending])}/>
+        <Buttons className={css(styles.button)} name={'Prontos'} onClick={() => setOrders([...statusReady])}/>
+        <Buttons className={css(styles.button)} name={'Entregues'} onClick={() => setOrders([...statusDelivered])}/>
       </div>
       <section>
       {
@@ -117,11 +117,29 @@ export default function Kitchen() {
 };
 
 const styles = StyleSheet.create({
-  orders: {
-    border: '2px solid red',
-    margin: '10px'
-    //display: 'flex',
-    //justifyContent: 'center',
-    //flexDirection: 'row'
-  }
+  button: {
+    ':focus': {
+      border: '2px solid #000',
+      borderRadius: '5px',
+      color: '#000'
+    },
+    margin: '9px',
+    padding: '1.5px',
+    border: '2px solid rgba(255,195,0,0.9)',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    backgroundColor: 'transparent',
+    color: 'black',
+    fontSize: '1.2em',
+    fontWeight: 'bold', 
+    // width: '6em',
+    height: '5em',
+    width:'50%',
+  },
+  menuButtonsSection: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    
+    backgroundColor: 'rgba(255,195,0,0.9)',
+  },
 })
