@@ -31,6 +31,10 @@ export default function Kitchen() {
         status: "pronto"
       }
     )
+    if (item.status === 'pendente') {
+      const index = orders.findIndex((i) => i.id === item.id)
+      orders.splice(index, 1);
+    }
   }
 
   const deliveredOrder = (item) => {
@@ -44,6 +48,10 @@ export default function Kitchen() {
         timeFinal: new Date().getTime(),
       }
     )
+    if (item.status === 'pronto') {
+      const index = orders.findIndex((i) => i.id === item.id)
+      orders.splice(index, 1);
+    }
   }
 
   const calculateTimestamp = (final, inicial) => {

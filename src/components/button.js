@@ -10,12 +10,18 @@ export default function Buttons (props) {
         {props.name} <br />
         {props.price}
         <p>
-        {props.extra ?        
-        <select>
+        {props.extra ? 
+        <>       
+        <select onChange={props.handleChange}>
           {props.extra.map(i => 
+          <>
             <option value={i}>{i}</option>
+            </>
           )}
-        </select>: ''
+        </select> <br />
+        <button onClick={props.handleClick}>vai</button>
+        </>
+        : ''
         }
         </p>
       </button>

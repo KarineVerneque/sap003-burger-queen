@@ -12,8 +12,11 @@ export default function Hall() {
   const [menu, setMenu] = useState([]);
   const [name, setName] = useState('');
   const [table, setTable] = useState('');
-  // const [option, setOption] = useState('');
-  // const [extra, setExtra] = useState('');  
+  const [extra, setExtra] = useState('Nenhum');
+
+  useEffect(() => {
+    setMenu([...breakfast])
+  }, [data])
   useEffect(() => {
     firebase
       .firestore()
@@ -34,6 +37,7 @@ export default function Hall() {
       orders[index].quantity += 1;
       setOrders([...orders]);
     }
+    
   }
 
   const deleteOrder = product => {    
@@ -47,20 +51,17 @@ export default function Hall() {
     }
   };
 
-  const addOptions = (e, product) => {
-    // console.log('target ai', e.target.value)
-    // setOption(e.target.value)
-    const options = {...product, name: product.name + ' de ' + e.target.value}
-    addOrder(options)
+  const addOptions = (option, product) => {
+    if (extra !== 'Nenhum') {
+      const options = {...product, name: product.name + ' de ' + option + ' com ' + extra, price: product.price + 1}
+      addOrder(options)
+    } else {
+      setExtra('Nenhum')
+      const options = {...product, name: product.name + ' de ' + option}
+      addOrder(options)
+    }  
   }
-/*
-  const addExtras = (e, product) => {
-    // console.log('target ai', product)
-    // setExtra(e.target.value)
-    const extras = {...product, name: product.name + 'de' + option + ' com ' + extra}
-    addOrder(extras)
-  }
-*/  
+
 
   function sendOrder() {
     name === '' && table === ''?
@@ -139,7 +140,8 @@ export default function Hall() {
                         name={option}
                         price={product.price}
                         extra={product.extras}
-                        onClick={(e) => addOptions(e, product)}
+                        handleChange={(e) => setExtra(e.target.value)}
+                        handleClick={() => addOptions(option, product)}                        
                         />
                       )}
                       </fieldset> 

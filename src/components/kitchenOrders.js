@@ -34,7 +34,11 @@ export default function OrderKitchen (props) {
             <td className={css(styles.border)}>{props.quantity}</td>
             {
               props.status !== 'entregue' ?
-                <td className={css(styles.border)}><button className={css(styles.btnStatus)} onClick={() => props.onClick(props)}>{props.btnName}</button></td>
+                <td className={css(styles.border)}>
+                  <button className={css(styles.btnStatus)} onClick={() => props.onClick(props)}>
+                    {props.btnName}
+                  </button>
+                </td>
               : false
             }
             {
