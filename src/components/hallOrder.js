@@ -11,8 +11,8 @@ export default function OrderSection (props) {
                     <td>{props.quantity}</td>
                     <td>{props.name}</td>
                     <td>{props.price}</td>
-                    <button onClick={() => props.onClick(props)}>
-                      {props.btnName}       
+                    <button className={css(styles.btnDelete)} onClick={() => props.onClick(props)}>
+                      X
                     </button> 
                     {props.table}   
                     {props.status}   
@@ -31,12 +31,21 @@ const styles = StyleSheet.create({
     color: '#fff',
     borderSpacing:'5px',
     width: '100%',
-    fontSize: '1em',
+    fontSize: '1.1em',
     tableLayout: 'fixed'
   },
   tr: {
     width: '10px',
     padding: '8px',
     textAlign: 'center',
+  },
+  btnDelete: {
+    padding: '15px',
+    border: 'none',
+    borderRadius: '3px',
+    background: 'rgba(255,0,0,0.7)',
+    color: '#fff',
+    fontSize: '1.1em',
+    fontWeight: 'bold'
   }
 });

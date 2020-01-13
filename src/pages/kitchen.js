@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../utils/firebase';
-import OrderKitchen from '../components/kitchenOrders'
+import KitchenOrder from '../components/kitchenOrders'
 import { StyleSheet, css } from 'aphrodite';
 import Buttons from '../components/button';
 
@@ -13,11 +13,11 @@ export default function Kitchen() {
       .firestore()
       .collection('orders')
       .onSnapshot((snapshot) => {
-          const newDatas = snapshot.docs.map((doc) => ({
-              id: doc.id,
-              ...doc.data()
-          }))            
-          setDatas(newDatas)            
+        const newDatas = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        }))            
+        setDatas(newDatas)            
       })
   }, [])
 
@@ -70,7 +70,7 @@ export default function Kitchen() {
       {
         orders.map(i =>
         i.status === 'pendente' ?
-        <OrderKitchen 
+        <KitchenOrder 
           {...i}
           className={css(styles.pendingStatus)}
           btnName={'Pronto'}
@@ -85,7 +85,7 @@ export default function Kitchen() {
             </div>
           )}
           />: i.status === 'pronto' ?
-          <OrderKitchen 
+          <KitchenOrder 
           {...i}
           className={css(styles.readyStatus)}
           btnName={'Entregue'}
@@ -101,7 +101,7 @@ export default function Kitchen() {
             </div>
           )}
           />: i.status === 'entregue' ?
-          <OrderKitchen 
+          <KitchenOrder 
           {...i}  
           className={css(styles.deliveredStatus)}
           timestamp={calculateTimestamp(i.timeFinal, i.time)}
@@ -127,29 +127,27 @@ const styles = StyleSheet.create({
     ':focus': {
       border: '2px solid #000',
       borderRadius: '5px',
+      background: 'rgba(255,195,0)',
       color: '#000'
     },
     margin: '9px',
     padding: '1.5px',
-    border: '2px solid rgba(255,195,0,0.9)',
+    border: '2px solid rgba(255,195,0)',
     borderRadius: '5px',
     cursor: 'pointer',
-    backgroundColor: 'transparent',
-    color: 'black',
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    color: 'rgba(255,195,0)',
     fontSize: '1.2em',
-    fontWeight: 'bold', 
-    // width: '6em',
+    fontWeight: 'bold',
     height: '5em',
     width:'50%',
   },
   menuButtonsSection: {
     display: 'flex',
     justifyContent: 'space-around',
-    
-    backgroundColor: 'rgba(255,195,0,0.9)',
   },
   pendingStatus: {
-    background: 'rgba(255,0,0,0.6)'
+    background: 'rgba(255,0,0,0.6)',
   },
   readyStatus: {
     background: 'rgba(0,128,0,0.6)'

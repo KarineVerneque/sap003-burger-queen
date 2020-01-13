@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import firebase from '../utils/firebase'
 import Buttons from '../components/button';
 import OrderSection from '../components/hallOrder';
-import OrderKitchen from '../components/kitchenOrders';
-import Input from '../components/input'
+import Input from '../components/input';
 import { StyleSheet, css } from 'aphrodite';
 import Swal from 'sweetalert2'
 
@@ -13,17 +12,17 @@ export default function Hall() {
   const [menu, setMenu] = useState([]);
   const [name, setName] = useState('');
   const [table, setTable] = useState('');
-  // const [options, setOptions] = useState('');
-  
+  // const [option, setOption] = useState('');
+  // const [extra, setExtra] = useState('');  
   useEffect(() => {
     firebase
       .firestore()
       .collection('menu')
       .onSnapshot((snapshot) => {
-          const newDatas = snapshot.docs.map((doc) => ({
-              ...doc.data()
-          }))            
-          setDatas(newDatas)            
+        const newDatas = snapshot.docs.map((doc) => ({
+          ...doc.data()
+        }))            
+        setDatas(newDatas)            
       })
   }, [])
 
@@ -49,19 +48,17 @@ export default function Hall() {
   };
 
   const addOptions = (e, product) => {
-    // console.log('oi', product)
-    // alert('extras')  
     // console.log('target ai', e.target.value)
-    // setOptions(e.target.value)
-    const option = {...product, name: product.name + ' de ' + e.target.value}
-    addOrder(option)
+    // setOption(e.target.value)
+    const options = {...product, name: product.name + ' de ' + e.target.value}
+    addOrder(options)
   }
 /*
   const addExtras = (e, product) => {
     // console.log('target ai', product)
-    // setOptions(e.target.value)
-    const option = {...product, name: product.name + ' com ' + e.target.value}
-    addOrder(option)
+    // setExtra(e.target.value)
+    const extras = {...product, name: product.name + 'de' + option + ' com ' + extra}
+    addOrder(extras)
   }
 */  
 
@@ -94,12 +91,12 @@ export default function Hall() {
     .add(
       {
         clientName: name,
-      table: table,
-      order: orders,
-      total: total,
-      status: 'pendente',
-      // timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      time: new Date().getTime(),
+        table: table,
+        order: orders,
+        total: total,
+        status: 'pendente',
+        // timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        time: new Date().getTime(),
       }
     )
     .then(
@@ -116,10 +113,8 @@ export default function Hall() {
   }
   
   const total = orders.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-
   const breakfast = data.filter(product => product.breakfast === "true")
   const dinner = data.filter(product => product.breakfast !== "true")
-
 
   return (
     <div className={css(styles.mainDiv)}> 
@@ -132,13 +127,12 @@ export default function Hall() {
           {
             menu.map(product =>
               <div className={css(styles.teste)}>
-                
                 {
                   product.hb === true ?
                   (
                     <div>
                       <fieldset>
-                      <legend>{product.name}</legend>                      
+                      <legend className={css(styles.legend)}>{product.name}</legend>                      
                       {product.options.map(option =>
                         <Buttons
                         className={css(styles.button)}
@@ -148,24 +142,15 @@ export default function Hall() {
                         onClick={(e) => addOptions(e, product)}
                         />
                       )}
-                      {/* {
-                        product.extras.map(i => //console.log('olha',i)
-                        <Buttons
-                        name={i}
-                        onClick={(e) => addExtras(e, product)}
-                        />
-                      )}     */}
                       </fieldset> 
                     </div>
                   )
                   :
                   <Buttons
-                  className={css(styles.button)}
-                  /*name={product.name}
-                  price={product.price}*/
-                  {...product}
-                  onClick={() => addOrder(product)}
-                />
+                    className={css(styles.button)}
+                    {...product}
+                    onClick={() => addOrder(product)}
+                  />
                 }
               </div>
             )
@@ -173,28 +158,31 @@ export default function Hall() {
         </div>               
       </section>
       <section className={css(styles.orderSection)}>
+        <div>
         <form>
-          <Input type={'text'} value={name} placeholder={'Nome do cliente'} onChange={(e) => setName(e.target.value)}/>
-          <Input type={'number'} value={table} placeholder={'Mesa'} onChange={(e) => setTable(e.target.value)}/>
+          <Input className={css(styles.inputName)} type={'text'} value={name} placeholder={'Nome do cliente'} onChange={(e) => setName(e.target.value)}/>
+          <Input className={css(styles.inputTable)} type={'number'} value={table} placeholder={'Mesa'} onChange={(e) => setTable(e.target.value)}/>
         </form>
         {
           orders.map(item => 
             <>
-            <OrderSection
-              className={css(styles.order)}
-              name={item.name}
-              onClick={() => deleteOrder(item)}
-              price={'R$ ' + item.price}
-              quantity={item.quantity}
-              btnName={'X'}
-            />
-            <hr />
-            {/* <Buttons name={'X'} onClick={() => deleteOrder(item)}/> */}
+              <OrderSection
+                className={css(styles.order)}
+                name={item.name}
+                onClick={() => deleteOrder(item)}
+                price={'R$ ' + item.price}
+                quantity={item.quantity}
+                // btnName={'X'}
+              />
+              <hr />
             </>
           )          
         }
-        <h2>Total: R$ {total}</h2>
-        <Buttons name={'enviar'} onClick={sendOrder}/>
+        <div className={css(styles.btnSendOrderDiv)}>
+          <h2>Total: R$ {total}</h2>
+          <Buttons className={css(styles.btnSendOrder)} name={'Enviar pedido'} onClick={sendOrder}/>
+        </div>
+      </div>
       </section>
     </div>
   )  
@@ -238,6 +226,7 @@ const styles = StyleSheet.create({
     display:"flex",
     flexWrap: 'wrap',
     justifyContent: 'center',
+    margin: '12px'
   },
   button: {
     margin: '9px',
@@ -252,14 +241,56 @@ const styles = StyleSheet.create({
     width: '6em',
     height: '5em'
   },
+  legend: {
+    fontSize: '1.2em',
+    fontWeight: 'bold',
+    color: '#fff',
+
+  },
   orderSection: {
+    display: 'flex',
+    justifyContent: 'center',
     width: '45%',
-    minHeight: '400px',
     margin: '10px',
     padding: '20px',
     border: '1.5px solid gray',
     borderRadius: '5px',
     backgroundColor: 'rgba(0,0,0,0.7)',
     color: '#fff'
+  },
+  btnSendOrder: {
+    backgroundColor: 'rgba(255,195,0,0.9)',
+    border: 'none',
+    borderRadius: '5px',
+    padding: '15px',
+    fontWeight: 'bold',
+    margin: '15px auto'
+  },
+  inputName: {
+    textAlign: 'center',
+    borderRadius: '5px',
+    width: '200px',
+    height: '30px',
+    margin: '3px',
+    padding: '5px',
+    alignItems: 'center',
+    fontSize: '1em',
+    border: 'none',
+  },
+  inputTable: {
+    textAlign: 'center',
+    borderRadius: '5px',
+    width: '70px',
+    height: '30px',
+    margin: '3px',
+    padding: '5px',
+    alignItems: 'center',
+    fontSize: '1em',
+    border: 'none',
+  },
+  btnSendOrderDiv: {
+    display: 'grid',
+    justifyContent: 'center',
+    margin: '20px'
   }
 });

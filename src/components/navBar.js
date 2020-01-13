@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { StyleSheet, css } from 'aphrodite';
 import Burgerqueen from '../img/Burgerqueen.png'
 
-export default function NavBar(props) {
+export default function NavBar() {
   return(
     <nav>
       <ul className={css(styles.ul)}>
