@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../utils/firebase';
-import OrderKitchen from '../components/orderKitchen'
+import OrderKitchen from '../components/kitchenOrders'
 import { StyleSheet, css } from 'aphrodite';
 import Buttons from '../components/button';
 
@@ -39,15 +39,15 @@ export default function Kitchen() {
     .collection('orders')
     .doc(item.id)
     .update(
-      {status: "entregue",
-      timeFinal: new Date().getTime(),
+      {
+        status: "entregue",
+        timeFinal: new Date().getTime(),
       }
     )
   }
 
   const calculateTimestamp = (final, inicial) => {
-    const timestamp  = (final - inicial) /1000;
-    
+    const timestamp  = (final - inicial) /1000;    
     const hours = Math.floor(timestamp/60/60);
     const minutes = Math.floor((timestamp - hours * 60 * 60) /60);
     const seconds = Math.floor(timestamp - hours * 60 * 60 - minutes * 60);    
@@ -72,8 +72,10 @@ export default function Kitchen() {
         i.status === 'pendente' ?
         <OrderKitchen 
           {...i}
+          className={css(styles.pendingStatus)}
           btnName={'Pronto'}
           onClick={() => readyOrder(i)}
+          quantity={i.order.map(i => i.quantity)}
           order={i.order.map(i => 
             <div>
               <span>
@@ -85,9 +87,11 @@ export default function Kitchen() {
           />: i.status === 'pronto' ?
           <OrderKitchen 
           {...i}
+          className={css(styles.readyStatus)}
           btnName={'Entregue'}
           onClick={() => deliveredOrder(i)}
           timestamp={calculateTimestamp(i.timeFinal, i.time)}
+          quantity={i.order.map(i => i.quantity)}
           order={i.order.map(i => 
             <div>
               <span>
@@ -96,10 +100,12 @@ export default function Kitchen() {
               </span>                  
             </div>
           )}
-          />:
+          />: i.status === 'entregue' ?
           <OrderKitchen 
-          {...i}
+          {...i}  
+          className={css(styles.deliveredStatus)}
           timestamp={calculateTimestamp(i.timeFinal, i.time)}
+          quantity={i.order.map(i => i.quantity)}
           order={i.order.map(i => 
             <div>
               <span>
@@ -108,7 +114,7 @@ export default function Kitchen() {
               </span>                  
             </div>
           )}
-          />
+          />: ''
         )
       }
       </section>
@@ -142,4 +148,15 @@ const styles = StyleSheet.create({
     
     backgroundColor: 'rgba(255,195,0,0.9)',
   },
+  pendingStatus: {
+    background: 'rgba(255,0,0,0.6)'
+  },
+  readyStatus: {
+    background: 'rgba(0,128,0,0.6)'
+  },
+  deliveredStatus: {
+    background: {
+      background: 'rgba(255,195,0,0.9)'
+    }
+  }
 })

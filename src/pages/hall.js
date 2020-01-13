@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../utils/firebase'
 import Buttons from '../components/button';
-import OrderSection from '../components/orderSection';
+import OrderSection from '../components/hallOrder';
+import OrderKitchen from '../components/kitchenOrders';
 import Input from '../components/input'
 import { StyleSheet, css } from 'aphrodite';
 import Swal from 'sweetalert2'
@@ -48,7 +49,7 @@ export default function Hall() {
   };
 
   const addOptions = (e, product) => {
-    console.log('oi', product)
+    // console.log('oi', product)
     // alert('extras')  
     // console.log('target ai', e.target.value)
     // setOptions(e.target.value)
@@ -187,6 +188,7 @@ export default function Hall() {
               quantity={item.quantity}
               btnName={'X'}
             />
+            <hr />
             {/* <Buttons name={'X'} onClick={() => deleteOrder(item)}/> */}
             </>
           )          
@@ -259,8 +261,5 @@ const styles = StyleSheet.create({
     borderRadius: '5px',
     backgroundColor: 'rgba(0,0,0,0.7)',
     color: '#fff'
-  },
-  order: {
-    background: 'pink'
   }
 });

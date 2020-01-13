@@ -7,11 +7,12 @@ export default function OrderKitchen (props) {
     <div>
         <table className={css(styles.table)}>
             <thead>
-                <tr className={css(styles.th)}>
+                <tr className={css(styles.tr)}>
                     <th className={css(styles.border)}>Mesa</th>
                     <th className={css(styles.border)}>Nome</th>                    
                     <th className={css(styles.border)}>status</th>
                     <th className={css(styles.border)}>Pedido</th>
+                    <th className={css(styles.border)}>Quantidade</th>
                     {
                       props.status !== 'entregue' ?
                         <th className={css(styles.border)}>Selecionar</th>
@@ -25,11 +26,12 @@ export default function OrderKitchen (props) {
                 </tr>
             </thead>
             <tbody>
-                <tr className={css(styles.td)}>
+                <tr className={css(styles.tr)}>
                     <td className={css(styles.border)}>{props.table}</td>
                     <td className={css(styles.border)}>{props.clientName}</td>
-                    <td className={css(styles.border)}>{props.status}</td>
+                    <td className={css(styles.border)} className={props.className}>{props.status}</td>
                     <td className={css(styles.border)}>{props.order}</td>
+                    <td className={css(styles.border)}>{props.quantity}</td>
                     {
                       props.status !== 'entregue' ?
                         <td className={css(styles.border)}><button onClick={() => props.onClick(props)}>{props.btnName}</button></td>
@@ -49,25 +51,21 @@ export default function OrderKitchen (props) {
 
 const styles = StyleSheet.create({
   table: {
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: 'rgba(0,0,0,0.8)',
     color: '#fff',
     borderSpacing:'2px',
     width: '100%',
     fontSize: '1em',
+    tableLayout: 'fixed'
   },
-  th: {
-    padding: '8px',
-    textAlign: 'center',
-    borderBottom: '1px solid #ddd',
-  },
-  td: {
+  tr: {
+    width: '10px',
     padding: '8px',
     textAlign: 'center',
     borderBottom: '1px solid #ddd',
   },
   border: {
     border: '1px solid #ddd',
-    // borderRight: '2px solid green',
     borderCollapse: 'collapse',
   },
 });
