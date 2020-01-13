@@ -4,6 +4,7 @@ import Buttons from '../components/button';
 import OrderSection from '../components/orderSection';
 import Input from '../components/input'
 import { StyleSheet, css } from 'aphrodite';
+import Swal from 'sweetalert2'
 
 export default function Hall() {
   const [data, setDatas] = useState([]);
@@ -54,35 +55,63 @@ export default function Hall() {
     const option = {...product, name: product.name + ' de ' + e.target.value}
     addOrder(option)
   }
-
+/*
   const addExtras = (e, product) => {
     // console.log('target ai', product)
     // setOptions(e.target.value)
     const option = {...product, name: product.name + ' com ' + e.target.value}
     addOrder(option)
   }
-  
+*/  
 
   function sendOrder() {
-    const clientOrder = {
-      clientName: name,
+    name === '' && table === ''?
+      Swal.fire({
+        icon: 'error',
+        title: 'Sem o nome do cliente!',
+        text: 'Favor digitar o nome do cliente!',
+      })
+    :
+    table === ''?
+      Swal.fire({
+        icon: 'error',
+        title: 'Sem o número da mesa!',
+        text: 'Favor digitar o nº da mesa!',
+      })
+    :
+    !orders.length ?
+    Swal.fire({
+      icon: 'error',
+      title: 'Favor selecionar ao menos um item!',
+      showConfirmButton: false,
+      timer: 2000
+    })
+    :
+    firebase
+    .firestore()
+    .collection('orders')
+    .add(
+      {
+        clientName: name,
       table: table,
       order: orders,
       total: total,
       status: 'pendente',
       // timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       time: new Date().getTime(),
-    }
-
-    firebase
-    .firestore()
-    .collection('orders')
-    .add(clientOrder)
+      }
+    )
     .then(
+      Swal.fire({
+        icon: 'success',
+        title: 'Pedido enviado com sucesso!',
+        showConfirmButton: false,
+        timer: 1500
+    }),
       setName(''),
       setTable(''),
       setOrders([]),    
-    )    
+    )
   }
   
   const total = orders.reduce((acc, item) => acc + (item.price * item.quantity), 0)
@@ -145,7 +174,7 @@ export default function Hall() {
       <section className={css(styles.orderSection)}>
         <form>
           <Input type={'text'} value={name} placeholder={'Nome do cliente'} onChange={(e) => setName(e.target.value)}/>
-          <Input type={'text'} value={table} placeholder={'Mesa'} onChange={(e) => setTable(e.target.value)}/>
+          <Input type={'number'} value={table} placeholder={'Mesa'} onChange={(e) => setTable(e.target.value)}/>
         </form>
         {
           orders.map(item => 
