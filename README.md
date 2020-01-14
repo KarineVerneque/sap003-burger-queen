@@ -17,8 +17,8 @@ Aplicação Single Page App desenvolvida para um restaurante, onde o atendente p
 A interface do salão deverá mostrar para o atendente um menu dividido em duas partes a primeira com café da manhã e a segunda com os lanches. O usuário poderá adicionar e remover os produtos do pedido antes de ser enviados para a cozinha e a interface deve mostrar o resumo do pedido com o custo total.
 A Cozinha receberá o pedido do salão com o status pendente para ser preparado. Após o preparo o cozinheiro modificará o status para pronto e o atendente poderá entregar e modificar o status para entregue, onde terá o histórico de todos os pedidos entregues com o tempo de preparo.
 
-![Hall](../src/img/hall.png)
-![Kitchen](../src/img/kitchen.png)
+![Hall](img/hall.png)
+![Kitchen](img/kitchen.png)
 
 ## 3. Tecnologias
 
