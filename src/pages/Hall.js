@@ -64,24 +64,28 @@ export default function Hall() {
   function sendOrder() {
     name === '' && table === ''?
       Swal.fire({
-        icon: 'error',
-        title: 'Sem o nome do cliente!',
-        text: 'Favor digitar o nome do cliente!',
+        icon: 'warning',
+        title: 'Digite o nome do cliente',
+        showConfirmButton: false,
+        timer: 1500
+        // text: 'Favor digitar o nome do cliente!',
       })
     :
     table === ''?
       Swal.fire({
         icon: 'error',
-        title: 'Sem o número da mesa!',
-        text: 'Favor digitar o nº da mesa!',
+        title: 'Digite o n° da mesa',
+        showConfirmButton: false,
+        timer: 1500
+        // text: 'Favor digitar o nº da mesa!',
       })
     :
     !orders.length ?
     Swal.fire({
       icon: 'error',
-      title: 'Favor selecionar ao menos um item!',
+      title: 'Selecione ao menos um item!',
       showConfirmButton: false,
-      timer: 2000
+      timer: 1500
     })
     :
     firebase
