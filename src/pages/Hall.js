@@ -210,8 +210,8 @@ const styles = StyleSheet.create({
   },
   menuButton: {
     ':focus': {
-      borderBottom: '2px solid #EA0000',
-      color: '#EA0000'
+      borderBottom: '2px solid rgba(255,195,0,0.9)',
+      color: 'rgba(255,195,0,0.9)'
     },
     border: 'none',
     borderBottom: '2px solid rgba(0,0,0,0.7)',
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     fontSize: '1.2em',
     fontWeight: 'bold', 
     width: '6em',
-    height: '5em'
+    height: '9em'
   },
   legend: {
     fontSize: '1.2em',
