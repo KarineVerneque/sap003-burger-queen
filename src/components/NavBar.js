@@ -11,7 +11,6 @@ export default function NavBar() {
             <Link className={css(styles.a)} to="/hall">Hall</Link>
           </li>
           <li>
-            {/* <p className={css(styles.foto)}></p> */}
             <img className={css(styles.img)} src={Burgerqueen} alt="Burgerqueen" />
           </li>
           <li className={css(styles.li)}>

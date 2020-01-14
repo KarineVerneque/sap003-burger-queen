@@ -62,22 +62,20 @@ export default function Hall() {
 
 
   function sendOrder() {
-    name === '' && table === ''?
+    name === '' ?
       Swal.fire({
         icon: 'warning',
         title: 'Digite o nome do cliente',
         showConfirmButton: false,
         timer: 1500
-        // text: 'Favor digitar o nome do cliente!',
       })
     :
-    table === ''?
+    table === '' ?
       Swal.fire({
         icon: 'error',
         title: 'Digite o n° da mesa',
         showConfirmButton: false,
         timer: 1500
-        // text: 'Favor digitar o nº da mesa!',
       })
     :
     !orders.length ?
@@ -98,17 +96,16 @@ export default function Hall() {
         order: orders,
         total: total,
         status: 'pendente',
-        // timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         time: new Date().getTime(),
       }
     )
     .then(
-      Swal.fire({
+    Swal.fire({
         icon: 'success',
         title: 'Pedido enviado com sucesso!',
         showConfirmButton: false,
         timer: 1500
-    }),
+      }),
       setName(''),
       setTable(''),
       setOrders([]),    
@@ -136,23 +133,19 @@ export default function Hall() {
                     <div>
                       <fieldset>
                       <legend className={css(styles.legend)}>{product.name}</legend>                      
-                      {product.options.map(option => <>
-                      {/* {console.log('product.extras', product.extras), */}
-                      {/* console.log('extra', extra)} */}
-                      
-                        <SelectButton
-                        className={css(styles.button)}
-                        name={option}
-                        price={product.price}
-                        extra={product.extras}
-                        product={product}
-                        // value={extra}
-                        handleClick={addOptions}                        
-                        />
-                        
+                      {
+                        product.options.map(option => 
+                        <>                      
+                          <SelectButton
+                          className={css(styles.button)}
+                          name={option}
+                          price={product.price}
+                          extra={product.extras}
+                          product={product}
+                          handleClick={addOptions}                        
+                          />    
                         </>
-                      )}
-                      
+                      )}                      
                       </fieldset> 
                     </div>
                   )
