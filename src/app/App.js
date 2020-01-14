@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Hall from '../pages/hall'
-import Kitchen from '../pages/kitchen'
-import NavBar from '../components/navBar'
+import Hall from '../pages/Hall'
+import Kitchen from '../pages/Kitchen'
+import NavBar from '../components/NavBar'
 
 export default function App() {
   return (

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../utils/firebase';
-import KitchenOrder from '../components/kitchenOrders'
+import KitchenOrder from '../components/KitchenOrders'
 import { StyleSheet, css } from 'aphrodite';
-import Buttons from '../components/button';
+import SelectButton from '../components/SelectButton';
 
 export default function Kitchen() {
   const [data, setDatas] = useState([]);
@@ -70,9 +70,9 @@ export default function Kitchen() {
   return (
     <>
       <div className={css(styles.menuButtonsSection)}>
-        <Buttons className={css(styles.button)} name={'Pendente'} onClick={() => setOrders([...statusPending])}/>
-        <Buttons className={css(styles.button)} name={'Prontos'} onClick={() => setOrders([...statusReady])}/>
-        <Buttons className={css(styles.button)} name={'Entregues'} onClick={() => setOrders([...statusDelivered])}/>
+        <SelectButton className={css(styles.button)} name={'Pendente'} onClick={() => setOrders([...statusPending])}/>
+        <SelectButton className={css(styles.button)} name={'Prontos'} onClick={() => setOrders([...statusReady])}/>
+        <SelectButton className={css(styles.button)} name={'Entregues'} onClick={() => setOrders([...statusDelivered])}/>
       </div>
       <section>
       {

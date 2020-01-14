@@ -10,7 +10,8 @@ export default function SelectButton (props) {
       onClick={props.onClick}
       class={props.className}
       >
-        {props.name}        
+        {props.name}
+          <br />    
         {props.price}
         <p>
           {props.extra ? 
