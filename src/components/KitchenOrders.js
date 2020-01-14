@@ -20,7 +20,7 @@ export default function OrderKitchen (props) {
             }
             {
               props.status === 'entregue' ?
-                <th>tempo</th>
+                <th className={css(styles.border)}>tempo</th>
               : false
             }
           </tr>
@@ -43,7 +43,7 @@ export default function OrderKitchen (props) {
             }
             {
               props.status ==='entregue' ?        
-                <td>{props.timestamp}</td>
+                <td className={css(styles.border)}>{props.timestamp}</td>
               : false
             }
           </tr>

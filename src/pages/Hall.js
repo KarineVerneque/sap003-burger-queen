@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../utils/firebase'
-import Buttons from '../components/button';
-import OrderSection from '../components/hallOrder';
-import Input from '../components/input';
+import SelectButton from '../components/SelectButton';
+import OrderSection from '../components/HallOrder';
+import Input from '../components/Input';
 import { StyleSheet, css } from 'aphrodite';
 import Swal from 'sweetalert2'
 
@@ -12,7 +12,6 @@ export default function Hall() {
   const [menu, setMenu] = useState([]);
   const [name, setName] = useState('');
   const [table, setTable] = useState('');
-  const [extra, setExtra] = useState('Nenhum');
 
   useEffect(() => {
     setMenu([...breakfast])
@@ -51,12 +50,11 @@ export default function Hall() {
     }
   };
 
-  const addOptions = (option, product) => {
+  const addOptions = (option, product, extra) => {
     if (extra !== 'Nenhum') {
       const options = {...product, name: product.name + ' de ' + option + ' com ' + extra, price: product.price + 1}
       addOrder(options)
     } else {
-      setExtra('Nenhum')
       const options = {...product, name: product.name + ' de ' + option}
       addOrder(options)
     }  
@@ -121,8 +119,8 @@ export default function Hall() {
     <div className={css(styles.mainDiv)}> 
       <section className={css(styles.menuSection)}>
         <div className={css(styles.menuButtonsSection)}>
-          <Buttons className={css(styles.menuButton)} name={'Café'} onClick={() => setMenu([...breakfast])}/>
-          <Buttons className={css(styles.menuButton)} name={'Jantar'} onClick={() => setMenu([...dinner])}/>
+          <SelectButton className={css(styles.menuButton)} name={'Café'} onClick={() => setMenu([...breakfast])}/>
+          <SelectButton className={css(styles.menuButton)} name={'Lanches'} onClick={() => setMenu([...dinner])}/>
         </div>
         <div className={css(styles.allProductsDiv)}>
           {
@@ -134,21 +132,28 @@ export default function Hall() {
                     <div>
                       <fieldset>
                       <legend className={css(styles.legend)}>{product.name}</legend>                      
-                      {product.options.map(option =>
-                        <Buttons
+                      {product.options.map(option => <>
+                      {/* {console.log('product.extras', product.extras), */}
+                      {/* console.log('extra', extra)} */}
+                      
+                        <SelectButton
                         className={css(styles.button)}
                         name={option}
                         price={product.price}
                         extra={product.extras}
-                        handleChange={(e) => setExtra(e.target.value)}
-                        handleClick={() => addOptions(option, product)}                        
+                        product={product}
+                        // value={extra}
+                        handleClick={addOptions}                        
                         />
+                        
+                        </>
                       )}
+                      
                       </fieldset> 
                     </div>
                   )
                   :
-                  <Buttons
+                  <SelectButton
                     className={css(styles.button)}
                     {...product}
                     onClick={() => addOrder(product)}
@@ -174,7 +179,6 @@ export default function Hall() {
                 onClick={() => deleteOrder(item)}
                 price={'R$ ' + item.price}
                 quantity={item.quantity}
-                // btnName={'X'}
               />
               <hr />
             </>
@@ -182,7 +186,7 @@ export default function Hall() {
         }
         <div className={css(styles.btnSendOrderDiv)}>
           <h2>Total: R$ {total}</h2>
-          <Buttons className={css(styles.btnSendOrder)} name={'Enviar pedido'} onClick={sendOrder}/>
+          <SelectButton className={css(styles.btnSendOrder)} name={'Enviar pedido'} onClick={sendOrder}/>
         </div>
       </div>
       </section>
