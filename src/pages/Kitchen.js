@@ -83,12 +83,19 @@ export default function Kitchen() {
           className={css(styles.pendingStatus)}
           btnName={'Pronto'}
           onClick={() => readyOrder(i)}
-          quantity={i.order.map(i => i.quantity)}
+          quantity={i.order.map(i =>
+            <>
+            <p className={css(styles.marginItens)}>
+              {i.quantity}
+            </p>
+            </>
+          )}
           order={i.order.map(i => 
             <div>
               <span>
-                <p>{i.name}</p>
-                {i.quantity}
+                <p className={css(styles.marginItens)}>
+                  {i.name}
+                </p>      
               </span>                  
             </div>
           )}
@@ -99,12 +106,15 @@ export default function Kitchen() {
           btnName={'Entregue'}
           onClick={() => deliveredOrder(i)}
           timestamp={calculateTimestamp(i.timeFinal, i.time)}
-          quantity={i.order.map(i => i.quantity)}
+          quantity={i.order.map(i => 
+            <>
+              <p className={css(styles.marginItens)}>{i.quantity}</p>
+            </>
+          )}
           order={i.order.map(i => 
             <div>
               <span>
-                <p>{i.name}</p>
-                {i.quantity}
+                <p className={css(styles.marginItens)}>{i.name}</p>
               </span>                  
             </div>
           )}
@@ -113,13 +123,16 @@ export default function Kitchen() {
           {...i}  
           className={css(styles.deliveredStatus)}
           timestamp={calculateTimestamp(i.timeFinal, i.time)}
-          quantity={i.order.map(i => i.quantity)}
+          quantity={i.order.map(i => 
+            <>
+              <p className={css(styles.marginItens)}>
+                {i.quantity}
+              </p>
+            </>  
+          )}            
           order={i.order.map(i => 
             <div>
-              <span>
-                <p>{i.name}</p>
-                {i.quantity}
-              </span>                  
+              <p className={css(styles.marginItens)}>{i.name}</p>
             </div>
           )}
           />: ''
@@ -164,5 +177,8 @@ const styles = StyleSheet.create({
     background: {
       background: 'rgba(255,195,0,0.9)'
     }
+  },
+  marginItens: {
+    margin: '14px'
   }
 })
