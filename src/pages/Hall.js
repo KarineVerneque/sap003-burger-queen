@@ -16,6 +16,7 @@ export default function Hall() {
   useEffect(() => {
     setMenu([...breakfast])
   }, [data])
+  
   useEffect(() => {
     firebase
       .firestore()
@@ -92,9 +93,9 @@ export default function Hall() {
     .add(
       {
         clientName: name,
-        table: table,
-        order: orders,
-        total: total,
+        table,
+        orders,
+        total,
         status: 'pendente',
         time: new Date().getTime(),
       }
@@ -113,8 +114,8 @@ export default function Hall() {
   }
   
   const total = orders.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-  const breakfast = data.filter(product => product.breakfast === "true")
-  const dinner = data.filter(product => product.breakfast !== "true")
+  const breakfast = data.filter(product => product.breakfast)
+  const dinner = data.filter(product => product.breakfast !== true)
 
   return (
     <div className={css(styles.mainDiv)}> 
@@ -128,7 +129,7 @@ export default function Hall() {
             menu.map(product =>
               <div className={css(styles.teste)}>
                 {
-                  product.hb === true ?
+                  product.hb ?
                   (
                     <div>
                       <fieldset>

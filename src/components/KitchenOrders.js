@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-export default function OrderKitchen (props) {
+export default function KitchenOrder (props) {
   
   return(
     <div>

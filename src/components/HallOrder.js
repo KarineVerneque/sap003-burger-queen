@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-export default function OrderSection (props) {
+export default function HallOrder (props) {
   
   return(
     <div class={props.className}>
-        <table className={css(styles.table)}>
+        <table className={css(props.class || styles.table)}>
             <tbody>
                 <tr className={css(styles.tr)}>
                     <td>{props.quantity}</td>

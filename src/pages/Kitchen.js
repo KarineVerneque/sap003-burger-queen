@@ -83,14 +83,14 @@ export default function Kitchen() {
           className={css(styles.pendingStatus)}
           btnName={'Pronto'}
           onClick={() => readyOrder(i)}
-          quantity={i.order.map(i =>
+          quantity={i.orders.map(i =>
             <>
             <p className={css(styles.marginItens)}>
               {i.quantity}
             </p>
             </>
           )}
-          order={i.order.map(i => 
+          order={i.orders.map(i => 
             <div>
               <span>
                 <p className={css(styles.marginItens)}>
