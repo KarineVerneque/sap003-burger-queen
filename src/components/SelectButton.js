@@ -7,12 +7,11 @@ export default function SelectButton (props) {
   return(
     <>
       <button
-      value={props.name}
-      onClick={props.onClick}
-      class={props.className}
+        value={props.name}
+        onClick={props.onClick}
+        class={props.className}
       >
-        {props.name}
-          <br />    
+        <p>{props.name}</p>
         {props.price}
         <p>
           {props.extra ? 
@@ -22,7 +21,6 @@ export default function SelectButton (props) {
                 <option className={css(styles.option)} value={i}>{i}</option>
               )}
             </select>
-              <br />
             <button className={css(styles.btnselect)} onClick={() => {
             props.handleClick(props.name, props.product, extra);
             setExtra('Nenhum')

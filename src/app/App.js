@@ -8,13 +8,11 @@ export default function App() {
   return (
     <>
       <Router>
-        <div>
-          <NavBar />
-          <Switch>
-            <Route path="/hall" component={Hall}/>
-            <Route path="/kitchen" component={Kitchen}/>
-          </Switch>
-        </div>
+        <NavBar />
+        <Switch>
+          <Route path="/hall" component={Hall}/>
+          <Route path="/kitchen" component={Kitchen}/>
+        </Switch>
       </Router>
     </>
   )
