@@ -76,64 +76,64 @@ export default function Kitchen() {
       </div>
       <section>
       {
-        orders.map(i =>
-        i.status === 'pendente' ?
+        orders.map(item =>
+          item.status === 'pendente' ?
         <KitchenOrder 
-          {...i}
+          {...item}
           className={css(styles.pendingStatus)}
           btnName={'Pronto'}
-          onClick={() => readyOrder(i)}
-          quantity={i.orders.map(i =>
+          onClick={() => readyOrder(item)}
+          quantity={item.orders.map(item =>
             <>
             <p className={css(styles.marginItens)}>
-              {i.quantity}
+              {item.quantity}
             </p>
             </>
           )}
-          order={i.orders.map(i => 
+          order={item.orders.map(item => 
             <div>
               <span>
                 <p className={css(styles.marginItens)}>
-                  {i.name}
+                  {item.name}
                 </p>      
               </span>                  
             </div>
           )}
-          />: i.status === 'pronto' ?
+          />: item.status === 'pronto' ?
           // console.log('pronto aqui')
           <KitchenOrder 
-          {...i}
+          {...item}
           className={css(styles.readyStatus)}
           btnName={'Entregue'}
-          onClick={() => deliveredOrder(i)}
-          timestamp={calculateTimestamp(i.timeFinal, i.time)}
-          quantity={i.orders.map(i => 
+          onClick={() => deliveredOrder(item)}
+          timestamp={calculateTimestamp(item.timeFinal, item.time)}
+          quantity={item.orders.map(i => 
             <>
-              <p className={css(styles.marginItens)}>{i.quantity}</p>
+              <p className={css(styles.marginItens)}>{item.quantity}</p>
             </>
           )}
-          order={i.orders.map(i => 
+          order={item.orders.map(item => 
             <div>
               <span>
-                <p className={css(styles.marginItens)}>{i.name}</p>
+                <p className={css(styles.marginItens)}>{item.name}</p>
               </span>                  
             </div>
           )}
-          />: i.status === 'entregue' ?
+          />: item.status === 'entregue' ?
           <KitchenOrder 
-          {...i}  
+          {...item}  
           className={css(styles.deliveredStatus)}
-          timestamp={calculateTimestamp(i.timeFinal, i.time)}
-          quantity={i.orders.map(i => 
+          timestamp={calculateTimestamp(item.timeFinal, item.time)}
+          quantity={item.orders.map(item => 
             <>
               <p className={css(styles.marginItens)}>
-                {i.quantity}
+                {item.quantity}
               </p>
             </>  
           )}            
-          order={i.orders.map(i => 
+          order={item.orders.map(item => 
             <div>
-              <p className={css(styles.marginItens)}>{i.name}</p>
+              <p className={css(styles.marginItens)}>{item.name}</p>
             </div>
           )}
           />: ''
