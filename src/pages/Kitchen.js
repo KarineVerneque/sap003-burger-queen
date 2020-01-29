@@ -107,7 +107,7 @@ export default function Kitchen() {
           btnName={'Entregue'}
           onClick={() => deliveredOrder(item)}
           timestamp={calculateTimestamp(item.timeFinal, item.time)}
-          quantity={item.orders.map(i => 
+          quantity={item.orders.map(item => 
             <>
               <p className={css(styles.marginItens)}>{item.quantity}</p>
             </>
