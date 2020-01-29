@@ -28,7 +28,7 @@ export default function Kitchen() {
     .doc(item.id)
     .update(
       {
-        status: "pronto"
+        status: 'pronto'
       }
     )
     if (item.status === 'pendente') {
@@ -70,7 +70,7 @@ export default function Kitchen() {
   return (
     <>
       <div className={css(styles.menuButtonsSection)}>
-        <SelectButton className={css(styles.button)} name={'Pendente'} onClick={() => setOrders([...statusPending])}/>
+        <SelectButton className={css(styles.button)} name={'Pendentes'} onClick={() => setOrders([...statusPending])}/>
         <SelectButton className={css(styles.button)} name={'Prontos'} onClick={() => setOrders([...statusReady])}/>
         <SelectButton className={css(styles.button)} name={'Entregues'} onClick={() => setOrders([...statusDelivered])}/>
       </div>
@@ -83,14 +83,14 @@ export default function Kitchen() {
           className={css(styles.pendingStatus)}
           btnName={'Pronto'}
           onClick={() => readyOrder(i)}
-          quantity={i.order.map(i =>
+          quantity={i.orders.map(i =>
             <>
             <p className={css(styles.marginItens)}>
               {i.quantity}
             </p>
             </>
           )}
-          order={i.order.map(i => 
+          order={i.orders.map(i => 
             <div>
               <span>
                 <p className={css(styles.marginItens)}>
@@ -100,18 +100,19 @@ export default function Kitchen() {
             </div>
           )}
           />: i.status === 'pronto' ?
+          // console.log('pronto aqui')
           <KitchenOrder 
           {...i}
           className={css(styles.readyStatus)}
           btnName={'Entregue'}
           onClick={() => deliveredOrder(i)}
           timestamp={calculateTimestamp(i.timeFinal, i.time)}
-          quantity={i.order.map(i => 
+          quantity={i.orders.map(i => 
             <>
               <p className={css(styles.marginItens)}>{i.quantity}</p>
             </>
           )}
-          order={i.order.map(i => 
+          order={i.orders.map(i => 
             <div>
               <span>
                 <p className={css(styles.marginItens)}>{i.name}</p>
@@ -123,14 +124,14 @@ export default function Kitchen() {
           {...i}  
           className={css(styles.deliveredStatus)}
           timestamp={calculateTimestamp(i.timeFinal, i.time)}
-          quantity={i.order.map(i => 
+          quantity={i.orders.map(i => 
             <>
               <p className={css(styles.marginItens)}>
                 {i.quantity}
               </p>
             </>  
           )}            
-          order={i.order.map(i => 
+          order={i.orders.map(i => 
             <div>
               <p className={css(styles.marginItens)}>{i.name}</p>
             </div>
