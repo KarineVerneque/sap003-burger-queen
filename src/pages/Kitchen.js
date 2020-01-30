@@ -21,37 +21,20 @@ export default function Kitchen() {
       })
   }, [])
 
-  const readyOrder = (item) => {
+  const updateStatus = (item, currentStatus ) => {
     firebase
-    .firestore()
-    .collection('orders')
-    .doc(item.id)
-    .update(
-      {
-        status: 'pronto'
-      }
-    )
-    if (item.status === 'pendente') {
-      const index = orders.findIndex((i) => i.id === item.id)
-      orders.splice(index, 1);
-    }
-  }
-
-  const deliveredOrder = (item) => {
-    firebase
-    .firestore()
-    .collection('orders')
-    .doc(item.id)
-    .update(
-      {
-        status: "entregue",
-        timeFinal: new Date().getTime(),
-      }
-    )
-    if (item.status === 'pronto') {
-      const index = orders.findIndex((i) => i.id === item.id)
-      orders.splice(index, 1);
-    }
+      .firestore()
+      .collection('orders')
+      .doc(item.id)
+      .update(
+        {
+          status: currentStatus,
+          timeFinal: item.status === "pronto" ? new Date().getTime() : false
+        }
+      )
+    const index = orders.findIndex((i) => i.id === item.id)
+    orders.splice(index, 1);
+    
   }
 
   const calculateTimestamp = (final, inicial) => {
@@ -82,7 +65,7 @@ export default function Kitchen() {
           {...item}
           className={css(styles.pendingStatus)}
           btnName={'Pronto'}
-          onClick={() => readyOrder(item)}
+          onClick={() => updateStatus(item, "pronto")}
           quantity={item.orders.map(item =>
             <>
             <p className={css(styles.marginItens)}>
@@ -105,7 +88,7 @@ export default function Kitchen() {
           {...item}
           className={css(styles.readyStatus)}
           btnName={'Entregue'}
-          onClick={() => deliveredOrder(item)}
+          onClick={() => updateStatus(item, "entregue")}
           timestamp={calculateTimestamp(item.timeFinal, item.time)}
           quantity={item.orders.map(item => 
             <>

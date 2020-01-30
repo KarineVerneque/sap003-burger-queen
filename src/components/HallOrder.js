@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   btnDelete: {
+    margin: '10px',
     padding: '15px',
     border: 'none',
     borderRadius: '3px',
