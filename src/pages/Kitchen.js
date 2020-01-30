@@ -6,7 +6,7 @@ import SelectButton from '../components/SelectButton';
 
 export default function Kitchen() {
   const [data, setDatas] = useState([]);
-  const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     firebase
@@ -90,7 +90,7 @@ export default function Kitchen() {
             </p>
             </>
           )}
-          order={i.orders.map(i => 
+          order={i.orders.map(i =>
             <div>
               <span>
                 <p className={css(styles.marginItens)}>
@@ -106,12 +106,12 @@ export default function Kitchen() {
           btnName={'Entregue'}
           onClick={() => deliveredOrder(i)}
           timestamp={calculateTimestamp(i.timeFinal, i.time)}
-          quantity={i.order.map(i => 
+          quantity={i.orders.map(i => 
             <>
               <p className={css(styles.marginItens)}>{i.quantity}</p>
             </>
           )}
-          order={i.order.map(i => 
+          order={i.orders.map(i => 
             <div>
               <span>
                 <p className={css(styles.marginItens)}>{i.name}</p>
@@ -123,14 +123,14 @@ export default function Kitchen() {
           {...i}  
           className={css(styles.deliveredStatus)}
           timestamp={calculateTimestamp(i.timeFinal, i.time)}
-          quantity={i.order.map(i => 
+          quantity={i.orders.map(i => 
             <>
               <p className={css(styles.marginItens)}>
                 {i.quantity}
               </p>
             </>  
           )}            
-          order={i.order.map(i => 
+          order={i.orders.map(i => 
             <div>
               <p className={css(styles.marginItens)}>{i.name}</p>
             </div>
