@@ -164,7 +164,7 @@ export default function Hall() {
       </section>
       <section className={css(styles.orderSection)}>
         <div>
-        <form>
+        <form className={css(styles.teste)}>
           <Input className={css(styles.inputName)} type={'text'} value={name} placeholder={'Nome do cliente'} onChange={(e) => setName(e.target.value)}/>
           <Input className={css(styles.inputTable)} type={'number'} value={table} placeholder={'Mesa'} onChange={(e) => setTable(e.target.value)}/>
         </form>
@@ -201,6 +201,10 @@ const styles = StyleSheet.create({
   menuButtonsSection: {
     display: 'flex',
     justifyContent: 'space-around',
+  },
+  teste: {
+    display: 'flex',
+    justifyContent: 'center'
   },
   menuButton: {
     ':focus': {
