@@ -23,7 +23,6 @@ export default function SelectButton (props) {
             </select>
             <button className={css(styles.btnselect)} onClick={() => {
             props.handleClick(props.name, props.product, extra);
-            // setExtra('Nenhum')
             }}
             >
               Adicionar
