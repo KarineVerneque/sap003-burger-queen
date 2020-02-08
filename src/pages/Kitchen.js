@@ -83,7 +83,6 @@ export default function Kitchen() {
             </div>
           )}
           />: item.status === 'pronto' ?
-          // console.log('pronto aqui')
           <KitchenOrder 
           {...item}
           className={css(styles.readyStatus)}
